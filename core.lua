@@ -39,9 +39,9 @@ NeP.library.register('NePCR', {
 				local Obj = NeP.OM.unitEnemie[i]
 				if NeP.DSL.Conditions['health'](Obj.key) <= health then
 					if IsSpellInRange(Spell, Obj.key)
-					and NeP.Protected.Infront('player', Obj.key)
+					and NeP.Engine.Infront('player', Obj.key)
 					and UnitCanAttack('player', Obj.key) then
-						NeP.Protected.Macro('/target '..Obj.key)
+						NeP.Engine.Macro('/target '..Obj.key)
 						return true
 					end
 				end
@@ -49,7 +49,7 @@ NeP.library.register('NePCR', {
 		else
 			if NeP.DSL.Conditions['health']('target') <= health then
 				if IsSpellInRange(Spell, 'target')
-				and NeP.Protected.Infront('player', 'target')
+				and NeP.Engine.Infront('player', 'target')
 				and UnitCanAttack('player', 'target') then
 					return true
 				end
@@ -71,7 +71,7 @@ NeP.library.register('NePCR', {
 			end
 
 			if UnitCanAttack('player', Obj.key)
-			and NeP.Protected.Infront('player', Obj.key) 
+			and NeP.Engine.Infront('player', Obj.key) 
 			and Obj.health < 20 then
 				NeP.Engine.ForceTarget = Obj.key
 				return true
@@ -112,7 +112,7 @@ NeP.library.register('NePCR', {
 					local _,_,_,_,_,_,debuffDuration = UnitDebuff(Obj.key, Spell, nil, 'PLAYER')
 					if not debuffDuration or debuffDuration - GetTime() < refreshAt then
 						if UnitCanAttack('player', Obj.key)
-						and NeP.Protected.Infront('player', Obj.key) then
+						and NeP.Engine.Infront('player', Obj.key) then
 							NeP.Engine.ForceTarget = Obj.key
 							return true
 						end
@@ -137,7 +137,7 @@ NeP.library.register('NePCR', {
 					local _,_,_,_,_,_,debuffDuration = UnitDebuff(Obj.key, Spell, nil, 'PLAYER')
 					if not debuffDuration or debuffDuration - GetTime() < refreshAt then
 						if UnitCanAttack('player', Obj.key)
-						and NeP.Protected.Infront('player', Obj.key)
+						and NeP.Engine.Infront('player', Obj.key)
 						and IsSpellInRange(Spell, Obj.key) then				
 							if NeP.DSL.Conditions['ttd'](Obj.key) > ((debuffDuration or 0) + SpellcastingTime)
 							or SpellcastingTime < 1 then
@@ -152,7 +152,7 @@ NeP.library.register('NePCR', {
 			local _,_,_,_,_,_,debuffDuration = UnitDebuff('target', Spell, nil, 'PLAYER')
 			if not debuffDuration or debuffDuration - GetTime() < refreshAt then
 				if IsSpellInRange(Spell, 'target')
-				and NeP.Protected.Infront('player', 'target')
+				and NeP.Engine.Infront('player', 'target')
 				and UnitCanAttack('player', 'target') then
 					if NeP.DSL.Conditions['ttd']('target') > ((debuffDuration or 0) + SpellcastingTime)
 					or SpellcastingTime < 1 then
@@ -169,10 +169,10 @@ NeP.library.register('NePCR', {
 
 NeP.DSL.RegisterConditon("petinmelee", function(target)
    if IsHackEnabled then 
-		return NeP.Protected.Distance('pet', target) < (UnitCombatReach('pet') + UnitCombatReach(target) + 1.5)
+		return NeP.Engine.Distance('pet', target) < (UnitCombatReach('pet') + UnitCombatReach(target) + 1.5)
 	else
 		-- Unlockers wich dont have UnitCombatReach like functions...
-		return NeP.Protected.Distance('pet', target) < 5
+		return NeP.Engine.Distance('pet', target) < 5
 	end
 end)
 
