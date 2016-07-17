@@ -70,14 +70,12 @@ local Interrupts = {
 
 local Cooldowns = {
 	-- Bestial Wrath
-	{'19574', {'pet.exists', 'target.petinmelee'}},
-	{'Stampede', 'player.proc.any'},
-	{'Stampede', 'player.hashero'},
-	{'Stampede', 'player.buff(19615).count >= 4'}, -- wt Frenzy
+	{'19574', {'pet.exists'}},
+	{'121818', 'player.hashero'},
+	{'121818', 'pet.buff(19615).count >= 4'}, -- wt Frenzy
 	{'131894'}, -- A Murder of Crows
-	{'Lifeblood'},
-	{'Berserking'},
-	{'Blood Fury'},
+	{'26297'},
+	{'20572'},
 	{'#trinket1'},
 	{'#trinket2'},
 }
@@ -97,32 +95,32 @@ local AoE = {
 	--Cast Multi-Shot, as often as needed to keep up the Beast Cleave buff on your pet.
 	{'2643'},
 	--Use Barrage.
-	{'Barrage'},
+	{'120360'},
 	--Use Explosive Trap.
-	{'Explosive Trap', 'player.buff(77769)' , 'target.ground'}
+	{'82939', 'player.buff(77769)' , 'target.ground'}
 }
 
 local inCombat = {
 	--Keep Steady Focus up, if you have taken this talent.
-	{'Cobra Shot', {
+	{'77767', {
 		'player.buff(177668).duration < 3',
 		'talent(4,1)',
-		'lastcast(Cobra Shot)'
+		'lastcast(77767)'
 	}, 'target'},
 	-- AoE
 	{AoE, 'player.area(40).enemies >= 3'},
 	--Cast Kill Command.
-	{'34026', {'pet.exists', 'target.petinmelee'}},
+	{'34026', 'pet.exists'},
 	--Cast Kill Shot,Only available when the target is below 20% health.
 	{'53351', '@NePCR.instaKill(35)'},
 	--Use Barrage, if you have taken this talent.
-	{'Barrage'},
+	{'120360'},
 	-- Focus Fire with 5 Frenzy stacks.
-	{'82692', 'player.buff(19615).count >= 5'},
+	{'82692', 'pet.buff(19615).count >= 5'},
 	--Cast Arcane Shot to dump any excess Focus.
 	{'3044', 'player.focus >= 80'},
 	--Cast Cobra Shot to generate Focus.
-	{'Cobra Shot'},
+	{'77767'},
 	-- Steady Shot for low lvl's
 	{'56641'},
 }
