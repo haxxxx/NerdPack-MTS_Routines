@@ -48,7 +48,7 @@ local InCombat = {
 }
 
 local outCombat = {
-	{All}
+
 }
 
 NeP.Engine.registerRotation(66, '[|cff'..NeP.Interface.addonColor..'NeP|r] Paladin - Protection', 
