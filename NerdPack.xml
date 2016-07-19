@@ -4,6 +4,19 @@
   <!-- Core Files -->
   <Script file="core.lua" />
 
+  <!-- Basic Rotations -->
+  <Script file="rotations\warrior\warrior.lua" />
+  <Script file="rotations\paladin\paladin.lua" />
+  <Script file="rotations\hunter\hunter.lua" />
+  <Script file="rotations\rogue\rogue.lua" />
+  <Script file="rotations\priest\priest.lua" />
+  <Script file="rotations\deathknight\deathknight.lua" />
+  <Script file="rotations\shaman\shaman.lua" />
+  <Script file="rotations\mage\mage.lua" />
+  <Script file="rotations\warlock\warlock.lua" />
+  <Script file="rotations\monk\monk.lua" />
+  <Script file="rotations\druid\druid.lua" />
+
   <!-- Rotations -->
   <Script file="rotations\paladin\retribution.lua" />
   <Script file="rotations\paladin\protection.lua" />

@@ -10,51 +10,7 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-		-- [[ Keybinds ]]
-		{type = 'text', text = 'Keybinds', align = 'center'},		
-			{type = 'text', text = 'Control: Fist of Justice OR Hammer of Justice', align = 'left'},
-			{type = 'text', text = 'Shift: Light\'s hammer', align = 'left'},
-			{type = 'text', text = 'Alt: Pause Rotation',align = 'left'},
-		-- [[ General ]]
-		{type = 'spacer'},{type = 'rule'},
-		{type = 'text', text = 'General', align = 'center' },
-			-- Buff
-			{ type = 'dropdown',text = 'Buff:', key = 'Buff', list = {
-				{text = 'Kings', key = 'Kings'},
-				{text = 'Might', key = 'Might'}
-        	}, default = 'Kings' },
-        	-- Seals
-			{ type = 'dropdown',text = 'Seal (ST):', key = 'SealST', list = {
-				{text = 'Truth', key = 'Truth'},
-				{text = 'Righteousness', key = 'Righteousness'},
-				{text = 'Justice', key = 'Justice'},
-				{text = 'Insight', key = 'Insight'},
-        	}, default = 'Truth' },
-        	{ type = 'dropdown',text = 'Seal (MT):', key = 'SealMT', list = {
-				{text = 'Truth', key = 'Truth'},
-				{text = 'Righteousness', key = 'Righteousness'},
-				{text = 'Justice', key = 'Justice'},
-				{text = 'Insight', key = 'Insight'},
-        	}, default = 'Righteousness' },
-			-- Self Dispel
-        	{ type = "checkbox", text = "Self Dispel", key = "SelfDispel", default = true},
-
-	    -- [[ Survival ]]
-		{ type = 'spacer' },{ type = 'rule' },
-	    {type = 'text', text = 'Survival', align = 'center'},
-			-- Healthstone
-			{ type = 'spinner', text = 'Healthstone', key = 'HealthStone', default = 90},
-			-- Lay on Hands
-			{ type = 'spinner', text = 'Lay on Hands', key = 'LayOnHands', default = 20},
-			-- Divine Shield
-			{ type = 'spinner', text = 'Divine Shield', key = 'DivineShield', default = 10},
-			-- Divine Protection
-			{ type = 'spinner', text = 'Divine Protection', key = 'DivineProtection', default = 85},
-			-- Selfless Healer
-			{ type = 'spinner', text = 'Selfless Healer (PLAYER)', key = 'FOLSH', default = 85},
-			{ type = 'spinner', text = 'Selfless Healer (RAID)', key = 'FOLSHR', default = 85},
-			-- Flash of Heal
-			{ type = 'spinner', text = 'Flash of Heal', key = 'FOL', default = 20},
+		
 	}
 }
 
@@ -66,194 +22,35 @@ local exeOnLoad = function()
 end
 
 local Buffs = {
-	-- Kings
-	{ '20217', {
-		'!player.buffs.stats',
-		(function() return PeFetch('NePConfPalaRet', 'Buff') == 'Kings' end)
-	}},
-	-- Might
-	{ '19740', {
-		'!player.buffs.mastery',
-		(function() return PeFetch('NePConfPalaRet', 'Buff') == 'Might' end)
-	}},
+	-- Greater Blessing of Wisdom
+	{'203539', '!player.buff(203539).any', 'player'},
+	-- Greater Blessing of Might
+	{'203528', '!player.buff(203528).any', 'player'},
+	-- Greater Blessing of Kings
+	{'203538', '!player.buff(203538).any', 'player'}
 }
 
 local Survival = {
-	-- Sacred Shield
-	{'20925'},
-	-- Flash of Light with Selfless Healer // Talent
-	{'19750', {
-		'player.buff(114250).count = 3',
-		(function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'FOLSH')) end)
-	}, 'player'},
-	{'19750', {
-		'player.buff(114250).count = 3',
-		(function() return dynEval('lowest.health <= '..PeFetch('NePConfPalaRet', 'FOLSHR')) end)
-	}, 'lowest'},
-	-- Healthstone
-	{'#5512', (function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'HealthStone')) end)},
-	-- Lay on Hands
-	{'633', (function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'LayOnHands')) end), 'player'},
-	-- Divine Shield
-	{'642', (function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'DivineShield')) end), 'player'},
-	-- Divine Protection
-	{'498', (function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'DivineProtection')) end)},
-	-- Flash of Light
-	{'19750', {
-		'player.buff(114250)',
-		(function() return dynEval('player.health <= '..PeFetch('NePConfPalaRet', 'FOL')) end)
-	}, 'player'},
-	-- Cleanse (Dispell)
-	{ '4987', {
-		'player.dispellable(4987)',
-		(function() return NeP.Interface.fetchKey('NePConfPalaRet', 'SelfDispel') end)
-	}, 'player' },
+	{'Flash of Light', 'player.health <= 40'}
 }
 
 local Cooldowns = {
-	-- Seraphim 
-	{'152262', {
-		'player.spell(31884).cooldown < 5',
-		'player.holypower >= 5'
-	}},
-	-- Avenging Wrath Use on cooldown for burst damage.
-	{'31884', {
-		'!player.buff(31884)',
-		'player.buff(152262)', -- Seraphim
-	}},
-	{'31884', {
-		'!player.buff(31884)',
-		'!talent(7, 2)', -- Seraphim
-	}},
-	-- Holy Avenger
-	{'105809', 'player.buff(31884)'},
-	-- Execution Sentence should be used on cooldown against targets that will live long enough to withstand the full duration of the ability.
-	{'114157'}, 
-}
-
-local Seals = {
-	{{ -- AoE
-		-- Seal of Truth
-		{'31801', {
-			'player.seal != 1',
-			(function() return PeFetch('NePConfPalaRet', 'SealMT') == 'Truth' end)
-		}},
-		-- Seal of Righteousness
-		{'20154', {
-			'player.seal != 2',
-			(function() return PeFetch('NePConfPalaRet', 'SealMT') == 'Righteousness' end)
-			
-		}},
-		-- Seal of Justice
-		{'20164', {
-			'player.seal != 3',
-			(function() return PeFetch('NePConfPalaRet', 'SealMT') == 'Justice' end)
-		}},
-		-- Seal of Insight
-		{'20165', {
-			'player.seal != 4',
-			(function() return PeFetch('NePConfPalaRet', 'SealMT') == 'Insight' end)
-			
-		}},
-	}, 'player.area(8).enemies >= 3' },
-
-	{{ -- ST
-		-- Seal of Truth
-		{'31801', {
-			'player.seal != 1',
-			(function() return PeFetch('NePConfPalaRet', 'SealST') == 'Truth' end)
-		}},
-		-- Seal of Righteousness
-		{'20154', {
-			'player.seal != 2',
-			(function() return PeFetch('NePConfPalaRet', 'SealST') == 'Righteousness' end)
-			
-		}},
-		-- Seal of Justice
-		{'20164', {
-			'player.seal != 3',
-			(function() return PeFetch('NePConfPalaRet', 'SealST') == 'Justice' end)
-		}},
-		-- Seal of Insight
-		{'20165', {
-			'player.seal != 4',
-			(function() return PeFetch('NePConfPalaRet', 'SealST') == 'Insight' end)
-			
-		}},
-	}, '!player.area(40).enemies >= 3' },
-}
-
-local EmpoweredSeals = {
-	-- Seal of Truth
-	{'31801', {
-		'player.seal != 1', -- Seal of Truth
-		'!player.buff(156990).duration > 3', -- Maraad's Truth
-		'player.spell(20271).cooldown <= 1' -- Judment  CD less then 1
-	}},
-	-- Seal of Righteousness
-	{'20154', {
-		'player.seal != 2', -- Seal of Righteousness
-		'!player.buff(156989).duration > 3', -- Liadrin's Righteousness
-		'player.buff(156990)', -- Maraad's Truth
-		'player.spell(20271).cooldown <= 1' -- Judment  CD less then 1
-	}},
-	-- Seal of Insigh
-	{'20165', {
-		'player.seal != 4', -- Seal of Insight
-		'!player.buff(156988).duration > 3', -- Uther's Insight
-		'player.buff(156990)', -- Maraad's Truth
-		'player.buff(156989)', -- Liadrin's Righteousness
-		'player.spell(20271).cooldown <= 1' -- Judment  CD less then 1
-	}},		
-					
-	-- Judgment		
-	{ '20271', {
-		'player.buff(156990).duration < 3', -- Maraad's Truth		
-			'player.seal = 1'		
-	}},
-	{ '20271', {
-		'player.buff(156989).duration < 3', -- Liadrin's Righteousness		
-		'player.seal = 2'		
-	}},
-	{ '20271', {
-		'player.buff(156988).duration < 3', -- Uther's Insight		
-		'player.seal = 4'		
-	}},
+	{'Crusade'}
 }
 
 local AoE = {
-	-- Divine Storm to spend Holy Power.
-	{'53385', 'player.holypower >= 3', 'target'},
-	-- Hammer of the Righteous to build Holy Power.
-	{'53595', nil, 'target'},
-	-- Judgment to build Holy Power.
-	{'20271', nil, 'target'},
-	-- Exorcism to build Holy Power.
-	{'879', nil, 'target'},
+	{'Divine Storm'}
 }
 
 local ST = {
-	-- Templar's Verdict with >= 5 Holy Power.
-	{'85256', 'player.holypower >= 5', 'target'},
-	-- Final Verdict with >= 5 Holy Power // TALENT (Replaces: Templar's Verdict).
-	{'157048', 'player.holypower >= 5', 'target'},
-	-- Crusader Strike to build Holy Power.
-	{'35395', nil, 'target'},
-	-- Judgment to build Holy Power.
-	{'20271', nil, 'target'},
-	-- Exorcism to build Holy Power.
-	{'879', nil, 'target'},
+	{'Templar\'s Verdict'},
+	{'Blade of Wrath', 'player.holypower <= 3'},
+	{'Judgment'}
 }
 
 local Keybinds = {
 	-- Pause
 	{'pause', 'modifier.alt'},
-	-- Fist of Justice
-	{'105593', 'modifier.control'},
-	-- Hammer of Justice
-	{'105593', 'modifier.control'},
-	-- Light's Hammer
-	{'114158', 'modifier.shift', 'target.ground'},
 }
 
 local outCombat = {
@@ -264,21 +61,11 @@ local outCombat = {
 
 NeP.Engine.registerRotation(70, '[|cff'..NeP.Interface.addonColor..'NeP|r] Paladin - Retribution', 
 	{-- In-Combat
+		{Buffs},
 		{Keybinds},
 		{All},
 		{Survival, 'player.health < 100'},
-		-- Rebuke // Interrupt
-		{'96231', 'target.interruptAt(40)'},
-		{EmpoweredSeals, 'talent(7, 1)'},
-		{Seals},
 		{Cooldowns, 'modifier.cooldowns'},
-		-- Divine Storm with Divine Crusader proc.
-		{'53385', 'player.buff(144595)', 'target'},
-		-- Hammer of Wrath when target is below or equal 35% Health or with Avenging Wrath.
-		{'158392', 'target.health <= 35', 'target'},
-		{'158392', 'player.buff(31884)', 'target'},
-		-- Holy Prism
-		{'114165', nil, 'target'},
 		{AoE, 'player.area(8).enemies >= 3'},
 		{ST}
 	}, outCombat, exeOnLoad)

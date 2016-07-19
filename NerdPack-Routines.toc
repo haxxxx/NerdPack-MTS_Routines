@@ -1,6 +1,6 @@
 ## Title: |r[|cff0070deNerdPack|r] Combat Routines
 ## Notes: Custom Combat Routines for NerdPack.
-## Interface: 60200
+## Interface: 70000
 ## Dependencies: NerdPack
 ## Author: MrTheSoulz
 

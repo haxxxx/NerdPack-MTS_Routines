@@ -129,7 +129,8 @@ local CatForm = {
 
 local outCombat = {
 	{keybinds},
-	{Shared}
+	{Shared},
+	{'#trinket1'}
 }
 
 NeP.Engine.registerRotation(104, '[|cff'..NeP.Interface.addonColor..'NeP|r] Druid - Guardian', 
