@@ -168,29 +168,39 @@ NeP.library.register('NePCR', {
 })
 
 NeP.DSL.RegisterConditon("petinmelee", function(target)
-   if IsHackEnabled then 
-		return NeP.Engine.Distance('pet', target) < (UnitCombatReach('pet') + UnitCombatReach(target) + 1.5)
-	else
-		-- Unlockers wich dont have UnitCombatReach like functions...
-		return NeP.Engine.Distance('pet', target) < 5
+	if target then
+		if IsHackEnabled then 
+			return NeP.Engine.Distance('pet', target) < (UnitCombatReach('pet') + UnitCombatReach(target) + 1.5)
+		else
+			-- Unlockers wich dont have UnitCombatReach like functions...
+			return NeP.Engine.Distance('pet', target) < 5
+		end
 	end
+	return 0
+end)
+
+NeP.DSL.RegisterConditon("petrange", function(target)
+	if target then
+		return NeP.Engine.Distance('pet', target)
+	end
+	return 0
 end)
 
 NeP.DSL.RegisterConditon("inMelee", function(target)
-   return NeP.Core.UnitAttackRange('player', target, 'melee')
+	return NeP.Core.UnitAttackRange('player', target, 'melee')
 end)
 
 NeP.DSL.RegisterConditon("inRanged", function(target)
-   return NeP.Core.UnitAttackRange('player', target, 'ranged')
+	return NeP.Core.UnitAttackRange('player', target, 'ranged')
 end)
 
 NeP.DSL.RegisterConditon("power.regen", function(target)
-  return select(2, GetPowerRegen(target))
+	return select(2, GetPowerRegen(target))
 end)
 
 NeP.DSL.RegisterConditon("casttime", function(target, spell)
-    local name, rank, icon, cast_time, min_range, max_range = GetSpellInfo(spell)
-    return cast_time
+	local name, rank, icon, cast_time, min_range, max_range = GetSpellInfo(spell)
+	return cast_time
 end)
 
 NeP.DSL.RegisterConditon("castwithin", function(target, spell)
@@ -205,9 +215,9 @@ NeP.DSL.RegisterConditon("castwithin", function(target, spell)
 end)
 
 NeP.DSL.RegisterConditon('twohand', function(target)
-  return IsEquippedItemType("Two-Hand")
+	return IsEquippedItemType("Two-Hand")
 end)
 
 NeP.DSL.RegisterConditon('onehand', function(target)
-  return IsEquippedItemType("One-Hand")
+	return IsEquippedItemType("One-Hand")
 end)
