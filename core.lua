@@ -179,13 +179,6 @@ NeP.DSL.RegisterConditon("petinmelee", function(target)
 	return 0
 end)
 
-NeP.DSL.RegisterConditon("petrange", function(target)
-	if target then
-		return NeP.Engine.Distance('pet', target)
-	end
-	return 0
-end)
-
 NeP.DSL.RegisterConditon("inMelee", function(target)
 	return NeP.Core.UnitAttackRange('player', target, 'melee')
 end)
