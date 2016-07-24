@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+local E = MTS.dynEval
+local F = function(key) NeP.Interface.fetchKey('NePConfPalaRet', key) end
+
+>>>>>>> origin/master
 local config = {
 	key = 'MTSPalaRet',
 	profiles = true,

@@ -1,6 +1,11 @@
 MTS = {
+<<<<<<< HEAD
 	Version = '0.0.1',
 	Branch = 'BETA',
+=======
+	Version = '0.0.1'
+	Branch = 'BETA'
+>>>>>>> origin/master
 	Interface = {
 		addonColor = 'A330C9',
 		Logo = NeP.Interface.Logo -- Temp until i get a logo
