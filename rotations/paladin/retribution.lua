@@ -17,7 +17,7 @@ local F = function(key) NeP.Interface.fetchKey('MTSPalaRet', key) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('MTSPalaRet') end)
+	MTS.ClassSetting('MTSPalaRet')
 end
 
 local Buffs = {

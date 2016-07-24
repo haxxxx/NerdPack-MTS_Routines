@@ -17,7 +17,7 @@ local F = function(key) NeP.Interface.fetchKey('MTSPalaProt', key) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('MTSPalaProt') end)
+	MTS.ClassSetting('MTSPalaProt')
 end
 
 local Survival = {
@@ -29,21 +29,34 @@ local Cooldowns = {
 }
 
 local AoE = {
-	
+	--Consecration on cooldown.
+	{'Consecration', 'target.range < 8'},
+	--Hammer of the Righteous while standing in Consecration.
+	{'Hammer of the Righteous', 'player.buff(Consecration)'}
 }
 
 local InCombat = {
-	{'Avenger\'s Shield'},
-	{'Consecration', 'target.range < 8'},
-	{'Light of the Protector', 'player.buff(Consecration)'},
-	{'Shield of the Righteous', 'spell.charges(Shield of the Righteous) > 2'},
+	--Shield of the Righteous to reduce damage taken.
 	{'Shield of the Righteous', {
-		'player.buff(Consecration)',
-		'!player.buff(Shield of the Righteous)'
+		'!player.buff(Shield of the Righteous)', 
+		'player.health < 90',
+		'player.buff(Consecration)'
 	}},
-	{'Hammer of the Righteous', 'player.buff(Consecration)'},
-	{'Hammer of the Righteous', 'spell.charges(Hammer of the Righteous) > 1'},
-	{'Judgment'}
+	{'Shield of the Righteous', {
+		'!player.buff(Shield of the Righteous)', 
+		'player.health < 60',
+	}},
+	--Light of the Protector as needed for self-healing.
+	{'Light of the Protector', {'player.health < 95', 'player.buff(Consecration)'}},
+	{'Light of the Protector', 'player.health < 60'},
+	--Judgment on cooldown to further reduce the cooldown of Shield of the Righteous.
+	{'Judgment'},
+	--Hammer of the Righteous when available to proc Grand Crusader.
+	{'Hammer of the Righteous', '!player.buff(Grand Crusader)'},
+	--Avenger's Shield with or without Grand Crusader.
+	{'Avenger\'s Shield'},
+	--Consecration on cooldown.
+	{'Consecration', 'target.range < 8'}
 }
 
 local outCombat = {

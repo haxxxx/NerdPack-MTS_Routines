@@ -19,6 +19,11 @@ function MTS.Splash()
 		'Click here to dot all the things!')
 end
 
+function MTS.ClassSetting(key)
+	local name = '|cff'..NeP.Core.classColor('player')..'Class Settings'
+	NeP.Interface.CreateSetting(name, function() NeP.Interface.ShowGUI(key) end)
+end
+
 function MTS.dynEval(condition, spell)
 	return Parse(condition, spell or '')
 end
