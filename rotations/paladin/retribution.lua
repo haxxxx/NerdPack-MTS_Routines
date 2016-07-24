@@ -1,10 +1,10 @@
-local dynEval = MTS.dynEval
-local PeFetch = NeP.Interface.fetchKey
+local E = MTS.dynEval
+local F = function(key) NeP.Interface.fetchKey('NePConfPalaRet', key) end
 
 local config = {
 	key = 'NePConfPalaRet',
 	profiles = true,
-	title = '|T'..NeP.Interface.Logo..':10:10|t'..NeP.Info.Nick..' Config',
+	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = 'Paladin Retribution Settings',
 	color = NeP.Core.classColor('player'),
 	width = 250,
