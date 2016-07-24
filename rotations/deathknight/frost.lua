@@ -34,7 +34,16 @@ local AoE = {
 }
 
 local ST = {
-
+	--Frost Fever maintain at all times via Howling Blast.
+	{'Howling Blast', '!target.debuff(Frost Fever)'},
+	--Obliterate with Killing Machine procs.
+	{'Obliterate', 'player.buff(Killing Machine)'},
+	--Howling Blast with Rime procs.
+	{'Howling Blast', 'player.buff(Rime)'},
+	--Obliterate to dump Runes.
+	{'Obliterate', 'player.runes >= 4'},
+	--Frost Strike to dump Runic Power.
+	{'Frost Strike'}
 }
 
 local Keybinds = {
