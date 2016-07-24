@@ -1,10 +1,7 @@
-local dynEval = MTS.dynEval
-local PeFetch = NeP.Interface.fetchKey
-
 local config = {
-	key = 'NePConfPalaRet',
+	key = 'MTSPalaRet',
 	profiles = true,
-	title = '|T'..NeP.Interface.Logo..':10:10|t'..NeP.Info.Nick..' Config',
+	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = 'Paladin Retribution Settings',
 	color = NeP.Core.classColor('player'),
 	width = 250,
@@ -15,10 +12,12 @@ local config = {
 }
 
 NeP.Interface.buildGUI(config)
+local E = MTS.dynEval
+local F = function(key) NeP.Interface.fetchKey('MTSPalaRet', key) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('NePConfPalaRet') end)
+	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('MTSPalaRet') end)
 end
 
 local Buffs = {
@@ -31,21 +30,29 @@ local Buffs = {
 }
 
 local Survival = {
-	{'Flash of Light', 'player.health <= 40'}
+	{'Lay on Hands', 'player.health <= 20'},
+	--{'Flash of Light', 'player.health <= 40'},
 }
 
 local Cooldowns = {
 	{'Crusade'}
+	{'Avenging Wrath'}
 }
 
 local AoE = {
+	--Divine Storm to spend Holy Power.
 	{'Divine Storm'}
 }
 
 local ST = {
-	{'Templar\'s Verdict'},
-	{'Blade of Wrath', 'player.holypower <= 3'},
-	{'Judgment'}
+	--Templar's Verdict with >= 5 Holy Power.
+	{'Templar\'s Verdict', 'player.holypower >= 5'},
+	--Judgment to build Holy Power.
+	{'Judgment'},
+	--Blade of Justice with 3 or less Holy Power.
+	{'Blade of Justice', 'player.holypower <= 3'},
+	--Crusader Strike with 4 or less Holy Power.
+	{'Crusader Strike', 'player.holypower <= 4'}
 }
 
 local Keybinds = {

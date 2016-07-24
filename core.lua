@@ -1,7 +1,10 @@
 MTS = {
+	Version = '0.0.1',
+	Branch = 'BETA',
 	Interface = {
-		addonColor = 'A330C9'
-	}
+		addonColor = 'A330C9',
+		Logo = NeP.Interface.Logo -- Temp until i get a logo
+	},
 }
 
 local Parse = NeP.DSL.parse
