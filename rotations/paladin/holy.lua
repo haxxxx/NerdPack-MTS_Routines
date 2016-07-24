@@ -1,4 +1,4 @@
-local dynEval = NePCR.dynEval
+local dynEval = MTS.dynEval
 local PeFetch = NeP.Interface.fetchKey
 
 local config = {
@@ -88,7 +88,7 @@ local config = {
 NeP.Interface.buildGUI(config)
 
 local lib = function()
-	NePCR.Splash()
+	MTS.Splash()
 	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('NePConfPalaHoly') end)
 end
 
@@ -408,7 +408,7 @@ local outCombat = {
 	}, 'lowest'},
 }
 
-NeP.Engine.registerRotation(65, '[|cff'..NeP.Interface.addonColor..'NeP|r] Paladin - Holy', 
+NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
 		{_All},
 		-- Dispell

@@ -1,4 +1,4 @@
-NeP.Engine.registerRotation(3, '[|cff'..NeP.Interface.addonColor..'NeP|r] Hunter - Basic', 
+NeP.Engine.registerRotation(3, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunter - Basic', 
 {-- In-Combat CR
 	{'Mend Pet', 'pet.health < 100'},
 	{'Kill Command', 'target.petrange < 25'},

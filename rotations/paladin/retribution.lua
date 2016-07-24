@@ -1,4 +1,4 @@
-local dynEval = NePCR.dynEval
+local dynEval = MTS.dynEval
 local PeFetch = NeP.Interface.fetchKey
 
 local config = {
@@ -17,7 +17,7 @@ local config = {
 NeP.Interface.buildGUI(config)
 
 local exeOnLoad = function()
-	NePCR.Splash()
+	MTS.Splash()
 	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('NePConfPalaRet') end)
 end
 
@@ -59,7 +59,7 @@ local outCombat = {
 	{Seals},
 }
 
-NeP.Engine.registerRotation(70, '[|cff'..NeP.Interface.addonColor..'NeP|r] Paladin - Retribution', 
+NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', 
 	{-- In-Combat
 		{Buffs},
 		{Keybinds},

@@ -1,10 +1,14 @@
-NePCR = {}
+MTS = {
+	Interface = {
+		addonColor = 'A330C9'
+	}
+}
 
 local Parse = NeP.DSL.parse
 local Fetch = NeP.Interface.fetchKey
 
 -- Temp Hack
-function NePCR.Splash()
+function MTS.Splash()
 	NeP.Interface.CreateToggle(
 		'ADots',
 		'Interface\\Icons\\Ability_creature_cursed_05.png',
@@ -12,11 +16,11 @@ function NePCR.Splash()
 		'Click here to dot all the things!')
 end
 
-function NePCR.dynEval(condition, spell)
+function MTS.dynEval(condition, spell)
 	return Parse(condition, spell or '')
 end
 
-NeP.library.register('NePCR', {
+NeP.library.register('MTS', {
 
 	HolyNova = function(units)
 		local minHeal = GetSpellBonusDamage(2) * 1.125

@@ -1,4 +1,4 @@
-local dynEval = NePCR.dynEval
+local dynEval = MTS.dynEval
 local fetchKey = NeP.Interface.fetchKey
 
 local config = {
@@ -17,7 +17,7 @@ local config = {
 NeP.Interface.buildGUI(config)
 
 local exeOnLoad = function()
-	NePCR.Splash()
+	MTS.Splash()
 	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('NePConfPalaProt') end)
 end
 
@@ -51,7 +51,7 @@ local outCombat = {
 
 }
 
-NeP.Engine.registerRotation(66, '[|cff'..NeP.Interface.addonColor..'NeP|r] Paladin - Protection', 
+NeP.Engine.registerRotation(66, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Protection', 
 	{ -- In-Combat
 		{Survival, "player.health < 100"},
 		{Cooldowns, "modifier.cooldowns"},

@@ -6,7 +6,7 @@ local Keybinds = {
 	}, 'target'}
 }
 
-NeP.Engine.registerRotation(1, '[|cff'..NeP.Interface.addonColor..'NeP|r] Warrior - Basic', 
+NeP.Engine.registerRotation(1, '[|cff'..MTS.Interface.addonColor..'MTS|r] Warrior - Basic', 
 {-- In-Combat CR
 	{Keybinds},
 	{'Victory Rush'},
