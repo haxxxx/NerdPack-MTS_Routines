@@ -8,7 +8,7 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-		{ type = 'spinner', text = 'test', key = 'test', default = 100},
+
 	}
 }
 
@@ -35,12 +35,17 @@ local AoE = {
 
 local ST = {
 	--Blood Boil to maintain Blood Plague.
+	{'Blood Boil', '!target.debuff(Blood Plague)'},
 	--Death and Decay whenever available. Watch for Crimson Scourge procs.
+	
 	--Marrowrend to maintain 5 undefined.
+	{'Marrowrend'},
 	--Blood Boil with 2 charges.
+	{'Blood Boil', 'player.spell(Blood Boil).charges >= 2'},
 	--Death Strike to dump Runic Power.
+	{'Death Strike', 'player.energy >= 75'},
 	--Heart Strike as a filler to build Runic Power.
-	{'Heart Strike', (function() return E('player.health <= '..F('test')) end)}
+	{'Heart Strike'}
 }
 
 local Keybinds = {
