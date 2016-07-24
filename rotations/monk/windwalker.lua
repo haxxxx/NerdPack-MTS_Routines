@@ -34,7 +34,19 @@ local AoE = {
 }
 
 local ST = {
-
+	--Fists of Fury on cooldown with >= 3 Chi.
+	{'Fists of Fury', {
+		'target.infront',
+		'player.chi >=3'
+	}},
+	--Blackout Kick with proc from Combo Breaker proc.
+	{'Blackout Kick', 'player.buff(Combo Breaker proc)'},
+	--Rising Sun Kick when available.
+	{'Rising Sun Kick'},
+	--Blackout Kick to dump additional Chi.
+	{'Blackout Kick'},
+	--Tiger Palm as default Chi builder and to proc Combo Breaker.
+	{'Tiger Palm'}
 }
 
 local Keybinds = {
