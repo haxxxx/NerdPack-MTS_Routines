@@ -14,7 +14,7 @@ local config = {
 
 NeP.Interface.buildGUI(config)
 local E = MTS.dynEval
-local F = function(key) NeP.Interface.fetchKey(mKey, key) end
+local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
 
 local exeOnLoad = function()
 	MTS.Splash()
@@ -34,7 +34,7 @@ local AoE = {
 }
 
 local ST = {
-
+	
 }
 
 local Keybinds = {

@@ -42,6 +42,7 @@
   <Script file="rotations\warlock\demonology.lua" />
   <Script file="rotations\hunter\bm.lua" />
   <Script file="rotations\hunter\mm.lua" />
+  <Script file="rotations\hunter\survival.lua" />
   <Script file="rotations\mage\arcane.lua" />
   <Script file="rotations\mage\frost.lua" />
   <Script file="rotations\shaman\resto.lua" />

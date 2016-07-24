@@ -3,18 +3,18 @@ local config = {
 	key = mKey,
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Death Knight Blood Settings',
+	subtitle = 'Death Knight Blood! Settings',
 	color = NeP.Core.classColor('player'),
 	width = 250,
 	height = 500,
 	config = {
-		
+		{ type = 'spinner', text = 'test', key = 'test', default = 100},
 	}
 }
 
 NeP.Interface.buildGUI(config)
 local E = MTS.dynEval
-local F = function(key) NeP.Interface.fetchKey(mKey, key) end
+local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
 
 local exeOnLoad = function()
 	MTS.Splash()
@@ -34,7 +34,13 @@ local AoE = {
 }
 
 local ST = {
-
+	--Blood Boil to maintain Blood Plague.
+	--Death and Decay whenever available. Watch for Crimson Scourge procs.
+	--Marrowrend to maintain 5 undefined.
+	--Blood Boil with 2 charges.
+	--Death Strike to dump Runic Power.
+	--Heart Strike as a filler to build Runic Power.
+	{'Heart Strike', (function() return E('player.health <= '..F('test')) end)}
 }
 
 local Keybinds = {
