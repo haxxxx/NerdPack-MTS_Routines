@@ -1,8 +1,5 @@
-local dynEval = MTS.dynEval
-local fetchKey = NeP.Interface.fetchKey
-
 local config = {
-	key = "NePConfPalaProt",
+	key = "MTSPalaProt",
 	profiles = true,
 	title = '|T'..NeP.Interface.Logo..':10:10|t'..NeP.Info.Nick.." Config",
 	subtitle = "Paladin Protection Settings",
@@ -15,10 +12,12 @@ local config = {
 }
 
 NeP.Interface.buildGUI(config)
+local E = MTS.dynEval
+local F = function(key) NeP.Interface.fetchKey('MTSPalaProt', key) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('NePConfPalaProt') end)
+	NeP.Interface.CreateSetting('Class Settings', function() NeP.Interface.ShowGUI('MTSPalaProt') end)
 end
 
 local Survival = {
