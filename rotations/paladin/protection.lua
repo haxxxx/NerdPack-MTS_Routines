@@ -1,7 +1,7 @@
 local config = {
 	key = "MTSPalaProt",
 	profiles = true,
-	title = '|T'..NeP.Interface.Logo..':10:10|t'..NeP.Info.Nick.." Config",
+	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = "Paladin Protection Settings",
 	color = NeP.Core.classColor('player'),
 	width = 250,
