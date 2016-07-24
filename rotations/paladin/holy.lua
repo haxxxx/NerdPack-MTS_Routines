@@ -1,5 +1,6 @@
+local mKey = 'MTSPalaHoly'
 local config = {
-	key = 'MTSPalaHoly',
+	key = mKey,
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = 'Paladin Holy Settings',
@@ -13,11 +14,11 @@ local config = {
 
 NeP.Interface.buildGUI(config)
 local E = MTS.dynEval
-local F = function(key) NeP.Interface.fetchKey('MTSPalaHoly', key) end
+local F = function(key) NeP.Interface.fetchKey(mKey, key) end
 
 local lib = function()
 	MTS.Splash()
-	MTS.ClassSetting(MTSPalaHoly)
+	MTS.ClassSetting(mKey)
 end
 
 local Lowest = {

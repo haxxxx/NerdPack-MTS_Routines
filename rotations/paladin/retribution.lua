@@ -1,5 +1,6 @@
+local mKey = 'MTSPalaRet'
 local config = {
-	key = 'MTSPalaRet',
+	key = mKey,
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = 'Paladin Retribution Settings',
@@ -13,21 +14,12 @@ local config = {
 
 NeP.Interface.buildGUI(config)
 local E = MTS.dynEval
-local F = function(key) NeP.Interface.fetchKey('MTSPalaRet', key) end
+local F = function(key) NeP.Interface.fetchKey(mKey, key) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	MTS.ClassSetting('MTSPalaRet')
+	MTS.ClassSetting(mKey)
 end
-
-local Buffs = {
-	-- Greater Blessing of Wisdom
-	{'203539', '!player.buff(203539).any', 'player'},
-	-- Greater Blessing of Might
-	{'203528', '!player.buff(203528).any', 'player'},
-	-- Greater Blessing of Kings
-	{'203538', '!player.buff(203538).any', 'player'}
-}
 
 local Survival = {
 	{'Lay on Hands', 'player.health <= 20'},
@@ -62,15 +54,17 @@ local Keybinds = {
 
 local outCombat = {
 	{Keybinds},
-	{Buffs},
-	{Seals},
+	-- Greater Blessing of Wisdom
+	{'203539', '!player.buff(203539).any', 'player'},
+	-- Greater Blessing of Might
+	{'203528', '!player.buff(203528).any', 'player'},
+	-- Greater Blessing of Kings
+	{'203538', '!player.buff(203538).any', 'player'}
 }
 
 NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', 
 	{-- In-Combat
-		{Buffs},
 		{Keybinds},
-		{All},
 		{Survival, 'player.health < 100'},
 		{Cooldowns, 'modifier.cooldowns'},
 		{AoE, 'player.area(8).enemies >= 3'},
