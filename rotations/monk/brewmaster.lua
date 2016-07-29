@@ -49,6 +49,7 @@ local ST = {
 local Keybinds = {
 	-- Pause
 	{'pause', 'modifier.alt'},
+	{'Summon Black Ox Statue', 'modifier.shift', 'mouseover.ground'}
 }
 
 local outCombat = {
