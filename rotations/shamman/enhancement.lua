@@ -39,7 +39,7 @@ local Melee = {
 	--Crash Lightning on cooldown.
 	{'Crash Lightning'},
 	--Stormstrike whenever available. Watch for Stormbringer procs.
-	{'Stormbringer'},
+	{'Stormstrike'},
 	--Lava Lash to dump excess Maelstrom.
 	{'Lava Lash', 'player.maelstrom > 65'},
 	--Rockbiter as a filler ability to build Maelstrom.
