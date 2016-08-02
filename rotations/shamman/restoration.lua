@@ -22,6 +22,7 @@ local exeOnLoad = function()
 end
 
 local Lowest = {
+	{'Purify Spirit', 'dispellAll(Purify Spirit)'},
 	--Riptide placed on as many targets as possible. Provides Tidal Waves.
 	{'Riptide', 'lowest.debuff(Riptide).duration < 5', 'lowest'},
 	--Healing Surge is an emergency heal to save players facing death. Consumes Tidal Waves.

@@ -47,6 +47,6 @@ local ouCombat = {
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
-		{'Cleanse', 'player.dispellAll(Cleanse)'},
+		{'Cleanse', 'dispellAll(Cleanse)'},
 		{Lowest}
 	},ouCombat, lib)
