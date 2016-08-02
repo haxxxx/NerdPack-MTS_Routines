@@ -61,6 +61,6 @@ NeP.Engine.registerRotation(252, '[|cff'..MTS.Interface.addonColor..'MTS|r] Deat
 		{Keybinds},
 		{Survival, 'player.health < 100'},
 		{Cooldowns, 'modifier.cooldowns'},
-		{AoE, 'player.area(8).enemies >= 3'},
-		{ST}
+		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
+		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)

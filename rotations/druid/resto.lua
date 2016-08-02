@@ -21,22 +21,6 @@ local exeOnLoad = function()
 	MTS.ClassSetting(mKey)
 end
 
-local Survival = {
-
-}
-
-local Cooldowns = {
-
-}
-
-local AoE = {
-
-}
-
-local ST = {
-
-}
-
 local Keybinds = {
 	-- Pause
 	{'pause', 'modifier.alt'},
@@ -49,8 +33,4 @@ local outCombat = {
 NeP.Engine.registerRotation(105, '[|cff'..MTS.Interface.addonColor..'MTS|r] Druid - Restoration', 
 	{-- In-Combat
 		{Keybinds},
-		{Survival, 'player.health < 100'},
-		{Cooldowns, 'modifier.cooldowns'},
-		{AoE, 'player.area(8).enemies >= 3'},
-		{ST}
 	}, outCombat, exeOnLoad)

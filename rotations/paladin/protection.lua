@@ -36,7 +36,7 @@ local AoE = {
 	{'Hammer of the Righteous', 'player.buff(Consecration)'}
 }
 
-local InCombat = {
+local ST = {
 	--Shield of the Righteous to reduce damage taken.
 	{'Shield of the Righteous', {
 		'!player.buff(Shield of the Righteous)', 
@@ -68,6 +68,6 @@ NeP.Engine.registerRotation(66, '[|cff'..MTS.Interface.addonColor..'MTS|r] Palad
 	{ -- In-Combat
 		{Survival, "player.health < 100"},
 		{Cooldowns, "modifier.cooldowns"},
-		--{AoE, 'player.area(40).enemies >= 3'},
-		{InCombat}
+		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
+		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)
