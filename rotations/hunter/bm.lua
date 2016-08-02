@@ -69,5 +69,5 @@ NeP.Engine.registerRotation(253, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunt
 		{Cooldowns, 'modifier.cooldowns'},
 		{pet, {'pet.exists', 'pet.alive'}},
 		{AoE, 'player.area(8).enemies >= 3'},
-		{ST}
+		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)
