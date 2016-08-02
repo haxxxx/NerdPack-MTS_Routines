@@ -49,6 +49,7 @@ local ST = {
 local Keybinds = {
 	-- Pause
 	{'pause', 'modifier.alt'},
+	{'Death and Decay', 'modifier.shift', 'mouseover.ground'}
 }
 
 local outCombat = {
