@@ -24,10 +24,12 @@ end
 local Lowest = {
 	--Beacon of Light maintain on your primary target at all times.
 	{'Beacon of Light', '!tank.buff(Beacon of Light)', 'tank'},
+	{'Beacon of Faith', '!tank2.buff(Beacon of Faith)', 'tank2'},
 	{{--Consume Infusion of Light procs using the appropriate heal before your next Holy Shock
 		{'Flash of Light', 'lowest.health < 60', 'lowest'},
 		{'Holy Light', 'lowest.health < 100', 'lowest'}
 	}, 'player.buff(Infusion of Light)' },
+	{'Light of Dawn', 'AoEHeal(80, 3)'},
 	--Holy Shock use on cooldown to generate Infusion of Light procs.
 	{'Holy Shock', 'lowest.health < 100', 'lowest'},
 	--Light of the Martyr a potent emergency heal as long as you heave health to spare.
@@ -42,7 +44,7 @@ local Lowest = {
 }
 
 local ouCombat = {
-	
+	--{'Holy Light', 'lowest.health < 100', 'lowest'}
 }
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
