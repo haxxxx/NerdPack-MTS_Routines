@@ -29,7 +29,7 @@ local Lowest = {
 		{'Flash of Light', 'lowest.health < 60', 'lowest'},
 		{'Holy Light', 'lowest.health < 100', 'lowest'}
 	}, 'player.buff(Infusion of Light)' },
-	{'Light of Dawn', 'AoEHeal(80, 3)'},
+	{'Light of Dawn', {'toggle.AoE', 'AoEHeal(80, 3, 15)'}},
 	--Holy Shock use on cooldown to generate Infusion of Light procs.
 	{'Holy Shock', 'lowest.health < 100', 'lowest'},
 	--Light of the Martyr a potent emergency heal as long as you heave health to spare.
@@ -44,7 +44,7 @@ local Lowest = {
 }
 
 local ouCombat = {
-	--{'Holy Light', 'lowest.health < 100', 'lowest'}
+	{'Holy Light', 'lowest.health < 100', 'lowest'}
 }
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 

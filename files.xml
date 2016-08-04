@@ -45,9 +45,9 @@
   <Script file="rotations\hunter\survival.lua" />
   <Script file="rotations\mage\arcane.lua" />
   <Script file="rotations\mage\frost.lua" />
-  <Script file="rotations\shamman\restoration.lua" />
-  <Script file="rotations\shamman\elemental.lua" />
-  <Script file="rotations\shamman\enhancement.lua" />
+  <Script file="rotations\shaman\restoration.lua" />
+  <Script file="rotations\shaman\elemental.lua" />
+  <Script file="rotations\shaman\enhancement.lua" />
   <Script file="rotations\rogue\sub.lua" />
   <Script file="rotations\rogue\assassin.lua" />
   <Script file="rotations\rogue\combat.lua" />
