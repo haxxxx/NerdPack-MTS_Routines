@@ -30,11 +30,25 @@ local Cooldowns = {
 }
 
 local AoE = {
-
+	--Mangle whenever available to generate Rage. Watch for Gore procs.
+	{'Mangle'},
+	--Thrash on cooldown.
+	{'Thrash'},
+	--Moonfire on as many targets as possible.
+	{'Moonfire', 'target.debuff(Moonfire).duration < 5'},
+	--Swipe as often as possible.
+	{'Swipe'}
 }
 
 local ST = {
-
+	--Mangle whenever available to generate Rage. Watch for Gore procs.
+	{'Mangle'},
+	--Thrash on cooldown.
+	{'Thrash'},
+	--Moonfire to maintain the DoT.
+	{'Moonfire', 'target.debuff(Moonfire).duration < 5'},
+	--Maul to dump excess Rage
+	{'Maul'}
 }
 
 local Keybinds = {
