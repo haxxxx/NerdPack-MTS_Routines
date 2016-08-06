@@ -48,8 +48,8 @@
   <Script file="rotations\shaman\restoration.lua" />
   <Script file="rotations\shaman\elemental.lua" />
   <Script file="rotations\shaman\enhancement.lua" />
-  <Script file="rotations\rogue\sub.lua" />
-  <Script file="rotations\rogue\assassin.lua" />
-  <Script file="rotations\rogue\combat.lua" />
+  <Script file="rotations\rogue\subtlety.lua" />
+  <Script file="rotations\rogue\assassination.lua" />
+  <Script file="rotations\rogue\outlaw.lua" />
 
 </Ui>
