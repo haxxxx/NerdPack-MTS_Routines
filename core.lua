@@ -199,23 +199,6 @@ NeP.DSL.RegisterConditon("petinmelee", function(target)
 	return 0
 end)
 
-NeP.DSL.RegisterConditon("inMelee", function(target)
-	return NeP.Core.UnitAttackRange('player', target, 'melee')
-end)
-
-NeP.DSL.RegisterConditon("inRanged", function(target)
-	return NeP.Core.UnitAttackRange('player', target, 'ranged')
-end)
-
-NeP.DSL.RegisterConditon("power.regen", function(target)
-	return select(2, GetPowerRegen(target))
-end)
-
-NeP.DSL.RegisterConditon("casttime", function(target, spell)
-	local name, rank, icon, cast_time, min_range, max_range = GetSpellInfo(spell)
-	return cast_time
-end)
-
 NeP.DSL.RegisterConditon("castwithin", function(target, spell)
 	local SpellID = select(7, GetSpellInfo(spell))
 	for k, v in pairs( NeP.ActionLog.log ) do
@@ -225,12 +208,4 @@ NeP.DSL.RegisterConditon("castwithin", function(target, spell)
 		end
 	end
 	return 20
-end)
-
-NeP.DSL.RegisterConditon('twohand', function(target)
-	return IsEquippedItemType("Two-Hand")
-end)
-
-NeP.DSL.RegisterConditon('onehand', function(target)
-	return IsEquippedItemType("One-Hand")
 end)
