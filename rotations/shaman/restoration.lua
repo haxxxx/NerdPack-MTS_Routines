@@ -34,12 +34,12 @@ local config = {
 	}
 }
 
-NeP.Interface.buildGUI(config)
 local E = MTS.dynEval
 local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
 
 local exeOnLoad = function()
 	MTS.Splash()
+	NeP.Interface.buildGUI(config)
 	MTS.ClassSetting(mKey)
 	NeP.Interface.CreateToggle(
   		'dps', 

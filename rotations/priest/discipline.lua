@@ -1,36 +1,35 @@
-local mKey = 'MTSDdResto'
+local mKey = 'MTS_PriestDisc'
 local config = {
 	key = mKey,
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Druid Restoration Settings',
+	subtitle = 'Priest - Discipline Settings',
 	color = NeP.Core.classColor('player'),
 	width = 250,
 	height = 500,
 	config = {
-
+   
 	}
 }
 
 local E = MTS.dynEval
 local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
 
-local exeOnLoad = function()
+local lib = function()
 	MTS.Splash()
 	NeP.Interface.buildGUI(config)
 	MTS.ClassSetting(mKey)
 end
 
-local Keybinds = {
-	-- Pause
-	{'pause', 'modifier.alt'},
+local Lowest = {
+
 }
 
-local outCombat = {
-	{Keybinds},
+local ouCombat = {
+
 }
 
-NeP.Engine.registerRotation(105, '[|cff'..MTS.Interface.addonColor..'MTS|r] Druid - Restoration', 
+NeP.Engine.registerRotation(256, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Discipline', 
 	{-- In-Combat
-		{Keybinds},
-	}, outCombat, exeOnLoad)
+		{Lowest}
+	},ouCombat, lib)
