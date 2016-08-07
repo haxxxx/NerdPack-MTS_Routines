@@ -21,8 +21,22 @@ local lib = function()
 	MTS.ClassSetting(mKey)
 end
 
-local Lowest = {
+local Atonement = {
+	--Shadow Word: Pain for a low to moderate HoT to your Atonement targets.
+	{'Shadow Word: Pain', nil, 'target'},
+	--Penance on cooldown for low to moderate healing to your Atonement targets.
+	{'Penance', nil, 'target'},
+	--Smite for low to moderate healing to your Atonement targets.
+	{'Smite', nil, 'target'}
+}
 
+local Lowest = {
+	--Power Word: Shield Use to absorb low to moderate damage and to apply Atonement.
+	{'Power Word: Shield', '!lowest.buff(Power Word: Shield)'},
+	-- Penance if talent "Penitent"
+	{'Penance', {'lowest.health < 70', 'talent(1,1)'}, 'target'},
+	--Plea for an efficient direct heal and to apply Atonement.
+	{'Plea', 'lowest.health < 30'}
 }
 
 local ouCombat = {
@@ -31,5 +45,6 @@ local ouCombat = {
 
 NeP.Engine.registerRotation(256, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Discipline', 
 	{-- In-Combat
-		{Lowest}
+		{Lowest, 'lowest.health < 100'},
+		{Atonement}
 	},ouCombat, lib)
