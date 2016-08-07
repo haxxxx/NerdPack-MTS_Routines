@@ -23,7 +23,7 @@ end
 
 local Atonement = {
 	--Shadow Word: Pain for a low to moderate HoT to your Atonement targets.
-	{'Shadow Word: Pain', nil, 'target'},
+	{'Shadow Word: Pain', 'target.debuff(Shadow Word: Pain).duration < 5', 'target'},
 	--Penance on cooldown for low to moderate healing to your Atonement targets.
 	{'Penance', nil, 'target'},
 	--Smite for low to moderate healing to your Atonement targets.

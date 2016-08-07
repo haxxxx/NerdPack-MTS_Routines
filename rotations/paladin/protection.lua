@@ -8,7 +8,8 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-    
+    	{type = 'spinner', text = 'Lay on Hands (Health %)', key = 'P_LH', default = 15},
+    	{type = 'spinner', text = 'Divine Protection (Health %)', key = 'P_DP', default = 90},
 	}
 }
 
@@ -22,7 +23,8 @@ local exeOnLoad = function()
 end
 
 local Survival = {
-	{'Lay on Hands', 'player.health < 15'},
+	{'Lay on Hands', (function() return E('player.health <='..F('P_LH')) end)},
+	{'Divine Protection', (function() return E('player.health <='..F('P_DP')) end)}
 }
 
 local Cooldowns = {
