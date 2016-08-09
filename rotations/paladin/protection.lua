@@ -8,8 +8,10 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-    	{type = 'spinner', text = 'Lay on Hands (Health %)', key = 'P_LH', default = 15},
+    	{type = 'spinner', text = 'Lay on Hands (Health %)', key = 'P_LH', default = 20},
     	{type = 'spinner', text = 'Divine Protection (Health %)', key = 'P_DP', default = 90},
+    	{type = 'spinner', text = 'Ardent Defender (Health %)', key = 'P_AD', default = 30},
+    	{type = 'spinner', text = 'Light of the Protector (Health %)', key = 'P_LP', default = 30}
 	}
 }
 
@@ -23,12 +25,17 @@ local exeOnLoad = function()
 end
 
 local Survival = {
-	{'Lay on Hands', (function() return E('player.health <='..F('P_LH')) end)},
-	{'Divine Protection', (function() return E('player.health <='..F('P_DP')) end)}
+	{'Light of the Protector', (function() return E('player.health <= '..F('P_LP')) end)},
+	{'Lay on Hands', (function() return E('player.health <= '..F('P_LH')) end)},
+	{'Divine Protection', (function() return E('player.health <= '..F('P_DP')) end)},
+	{'Ardent Defender', (function() return E('player.health <= '..F('P_AD')) end)}
+}
+
+local Interrupts = {
+	{'Rebuke'}
 }
 
 local Cooldowns = {
-	{'Ardent Defender', 'player.health < 30'}
 }
 
 local AoE = {
@@ -49,9 +56,6 @@ local ST = {
 		'!player.buff(Shield of the Righteous)', 
 		'player.health < 60',
 	}},
-	--Light of the Protector as needed for self-healing.
-	{'Light of the Protector', {'player.health < 95', 'player.buff(Consecration)'}},
-	{'Light of the Protector', 'player.health < 60'},
 	--Judgment on cooldown to further reduce the cooldown of Shield of the Righteous.
 	{'Judgment'},
 	--Hammer of the Righteous when available to proc Grand Crusader.
@@ -71,5 +75,5 @@ NeP.Engine.registerRotation(66, '[|cff'..MTS.Interface.addonColor..'MTS|r] Palad
 		{Survival, "player.health < 100"},
 		{Cooldowns, "modifier.cooldowns"},
 		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
-		{ST, {'target.range < 8', 'target.infront'}}
+		{Interrupts, 'target.interruptsAt(50)'},
 	}, outCombat, exeOnLoad)
