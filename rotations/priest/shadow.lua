@@ -23,7 +23,7 @@ end
 
 local Voidform = {
 	--Void Bolt on cooldown.
-	{'Void Eruption'},
+	{'!Void Eruption'},
 	--Shadow Word: Death when available on targets with <= 20% health.
 	{'Shadow Word: Death', 'target.health <= 20'},
 	--Mind Blast on cooldown.
