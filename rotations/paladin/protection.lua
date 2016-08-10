@@ -40,7 +40,7 @@ local Cooldowns = {
 
 local AoE = {
 	--Consecration on cooldown.
-	{'Consecration', 'target.range < 8'},
+	{'Consecration', 'target.range <= 5'},
 	--Hammer of the Righteous while standing in Consecration.
 	{'Hammer of the Righteous', 'player.buff(Consecration)'}
 }
@@ -63,7 +63,7 @@ local ST = {
 	--Avenger's Shield with or without Grand Crusader.
 	{'Avenger\'s Shield'},
 	--Consecration on cooldown.
-	{'Consecration', 'target.range < 8'}
+	{'Consecration', 'target.range <= 5'}
 }
 
 local outCombat = {
