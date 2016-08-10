@@ -30,7 +30,7 @@ local Interrupts = {
 }
 
 local Cooldowns = {
-	{'Metamorphosis'}
+	{'Metamorphosis', nil, 'target.ground'}
 }
 
 local inCombat = {
@@ -47,8 +47,8 @@ local outCombat = {
 
 NeP.Engine.registerRotation(577, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demon Hunter - Havoc', 
 	{ -- In-Combat
-		{Survival, "player.health < 100"},
+		{Survival, 'player.health < 100'},
 		{Interrupts, 'target.interruptsAt(50)'},
-		{Cooldowns, "modifier.cooldowns"},
+		{Cooldowns, 'toggle.cooldowns'},
 		{inCombat, 'target.infront'}
 	}, outCombat, exeOnLoad)

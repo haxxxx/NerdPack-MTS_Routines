@@ -74,7 +74,7 @@ NeP.Engine.registerRotation(66, '[|cff'..MTS.Interface.addonColor..'MTS|r] Palad
 	{ -- In-Combat
 		{Survival, "player.health < 100"},
 		{Interrupts, 'target.interruptsAt(50)'},
-		{Cooldowns, "modifier.cooldowns"},
+		{Cooldowns, "toggle.cooldowns"},
 		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
 		{ST, 'target.infront'}
 	}, outCombat, exeOnLoad)
