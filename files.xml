@@ -51,5 +51,7 @@
   <Script file="rotations\rogue\subtlety.lua" />
   <Script file="rotations\rogue\assassination.lua" />
   <Script file="rotations\rogue\outlaw.lua" />
+  <Script file="rotations\demon hunter\vengeance.lua" />
+  <Script file="rotations\demon hunter\havoc.lua" />
 
 </Ui>
