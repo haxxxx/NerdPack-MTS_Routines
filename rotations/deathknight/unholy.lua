@@ -4,7 +4,7 @@ local config = {
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = 'Death Knight unholy Settings',
-	color = NeP.Core.classColor('player'),
+	color = (function() return NeP.Core.classColor('player') end),
 	width = 250,
 	height = 500,
 	config = {
@@ -47,9 +47,8 @@ local ST = {
 }
 
 local Keybinds = {
-	-- Pause
 	{'pause', 'modifier.alt'},
-	{'Death and Decay', 'modifier.shift', 'mouseover.ground'}
+	{'Death and Decay', 'modifier.shift', 'mouseover.ground'},
 }
 
 local outCombat = {

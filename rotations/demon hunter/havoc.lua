@@ -4,7 +4,7 @@ local config = {
 	profiles = true,
 	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
 	subtitle = "Demon Hunter - Havoc Settings",
-	color = NeP.Core.classColor('player'),
+	color = (function() return NeP.Core.classColor('player') end),
 	width = 250,
 	height = 500,
 	config = {
@@ -29,6 +29,10 @@ local Interrupts = {
 	{'Consume Magic'}
 }
 
+local Keybinds = {
+	{'pause', 'modifier.alt'}
+}
+
 local Cooldowns = {
 	{'Metamorphosis', nil, 'target.ground'}
 }
@@ -42,11 +46,13 @@ local inCombat = {
 }
 
 local outCombat = {
-
+	{'#trinket1'},
+	{Keybinds}
 }
 
 NeP.Engine.registerRotation(577, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demon Hunter - Havoc', 
 	{ -- In-Combat
+		{Keybinds},
 		{Survival, 'player.health < 100'},
 		{Interrupts, 'target.interruptsAt(50)'},
 		{Cooldowns, 'toggle.cooldowns'},
