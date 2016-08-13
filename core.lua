@@ -1,5 +1,5 @@
 MTS = {
-	Version = 0.1,
+	Version = 0.2,
 	Branch = 'BETA',
 	Interface = {
 		addonColor = 'A330C9',
@@ -8,7 +8,7 @@ MTS = {
 }
 
 -- Core version check
-if NeP.Info.Version >= 70.1 then
+if NeP.Info.Version >= 70.8 then
 	NeP.Core.Print('Loaded |T'..MTS.Interface.Logo..':10:10|t[|cff'..MTS.Interface.addonColor..'MTS|r] Combat-Routines v:'..MTS.Version)
 else
 	NeP.Core.Print('Failed to load MTS Combat Routines.\nYour Core is outdated.')
