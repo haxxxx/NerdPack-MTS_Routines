@@ -57,7 +57,10 @@ local Lowest = {
 }
 
 local outCombat = {
-	{'Holy Light', 'lowest.health < 100', 'lowest'}
+	{Moving},
+	{{ -- Not moving
+		{'Holy Light', 'lowest.health < 100', 'lowest'}
+	}, '!player.moving' },
 }
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
