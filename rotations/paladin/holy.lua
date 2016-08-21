@@ -21,15 +21,12 @@ local lib = function()
 	MTS.ClassSetting(mKey)
 end
 
-local Lowest = {
-	--Beacon of Light maintain on your primary target at all times.
-	{'Beacon of Light', '!tank.buff(Beacon of Light)', 'tank'},
-	{'Beacon of Faith', '!tank2.buff(Beacon of Faith)', 'tank2'},
+local FastHeals = {
+	--{'Cleanse', 'dispellAll(Cleanse)'},
 	{{--Consume Infusion of Light procs using the appropriate heal before your next Holy Shock
 		{'Flash of Light', 'lowest.health < 60', 'lowest'},
 		{'Holy Light', 'lowest.health < 100', 'lowest'}
 	}, 'player.buff(Infusion of Light)' },
-	{'Light of Dawn', {'toggle.AoE', 'AoEHeal(80, 3, 15)'}},
 	--Holy Shock use on cooldown to generate Infusion of Light procs.
 	{'Holy Shock', 'lowest.health < 100', 'lowest'},
 	--Light of the Martyr a potent emergency heal as long as you heave health to spare.
@@ -37,18 +34,38 @@ local Lowest = {
 		'player.health > 40',
 		'lowest.health < 30'
 	}, 'lowest'},
+}
+
+local Tank = {
+	--Beacon of Light maintain on your primary target at all times.
+	{'Beacon of Light', '!tank.buff(Beacon of Light)', 'tank'},
+	{'Beacon of Faith', '!tank2.buff(Beacon of Faith)', 'tank2'},
+}
+
+local Moving = {
+	{'Bestow Faith', 'lowest.health < 100', 'lowest'},
+	--Holy Shock use on cooldown to generate Infusion of Light procs.
+	{'Holy Shock', 'lowest.health < 100', 'lowest'},
+}
+
+local Lowest = {
+	{'Light of Dawn', {'toggle.AoE', 'AoEHeal(80, 3, 15)'}},
 	--Flash of Light use as an emergency heal to save players facing death.
 	{'Flash of Light', 'lowest.health < 50', 'lowest'},
 	--Holy Light use to heal moderate to high damage.
 	{'Holy Light', 'lowest.health < 100', 'lowest'}
 }
 
-local ouCombat = {
+local outCombat = {
 	{'Holy Light', 'lowest.health < 100', 'lowest'}
 }
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
-		{'Cleanse', 'dispellAll(Cleanse)'},
-		{Lowest}
-	},ouCombat, lib)
+		{{ -- Not moving
+			{FastHeals},
+			{Tank},
+			{Lowest, 'lowest.health < 100'}
+		}, '!player.moving' },
+		{Moving}
+	}, outCombat, lib)
