@@ -49,7 +49,7 @@ local Moving = {
 }
 
 local Lowest = {
-	{'Light of Dawn', {'toggle.AoE', 'AoEHeal(80, 3, 15)'}},
+	{'Light of Dawn', {'toggle.AoE', 'HealInfront(80, 2, 15)'}},
 	--Flash of Light use as an emergency heal to save players facing death.
 	{'Flash of Light', 'lowest.health < 50', 'lowest'},
 	--Holy Light use to heal moderate to high damage.
