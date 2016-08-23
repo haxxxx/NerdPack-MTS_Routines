@@ -8,7 +8,26 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-   
+		{type = 'header', text = 'Keybinds', align = 'center'},
+		{type = 'text', text = 'Alt: PAUSE CR'},
+
+		{type = 'ruler'},{type = 'spacer'},
+		{type = 'header', text = 'General', align = 'center'},
+		{type = 'spinner', text = 'PANIC! Lay on Hands (Health %)', key = 'G_LoH', default = 25},
+		{type = 'spinner', text = 'PANIC! Light of the Martyr (Health %)', key = 'G_LotM', default = 30},
+		
+		{type = 'ruler'},{type = 'spacer'},
+		{type = 'header', text = 'Tank', align = 'center'},
+
+		
+		{type = 'ruler'},{type = 'spacer'},
+		{type = 'header', text = 'Player', align = 'center'},
+
+		
+		{type = 'ruler'},{type = 'spacer'},
+		{type = 'header', text = 'Lowest', align = 'center'},
+		{type = 'spinner', text = 'Holy Light (Health %)', key = 'L_HL', default = 100},
+
 	}
 }
 
@@ -19,9 +38,19 @@ local lib = function()
 	MTS.Splash()
 	NeP.Interface.buildGUI(config)
 	MTS.ClassSetting(mKey)
+	NeP.Interface.CreateToggle(
+  		'dps', 
+  		'Interface\\Icons\\Spell_shaman_stormearthfire.png‎', 
+  		'Some DPS', 
+  		'Do some damage while healing in party/raid.')
 end
 
+local keybinds = {
+	{'pause', 'modifier.alt'}
+}
+
 local FastHeals = {
+	{'!Lay on Hands', (function() return E('lowest.health < '..F('G_LoH')) end), 'lowest'},
 	--{'Cleanse', 'dispellAll(Cleanse)'},
 	{{--Consume Infusion of Light procs using the appropriate heal before your next Holy Shock
 		{'Flash of Light', 'lowest.health < 60', 'lowest'},
@@ -29,10 +58,12 @@ local FastHeals = {
 	}, 'player.buff(Infusion of Light)' },
 	--Holy Shock use on cooldown to generate Infusion of Light procs.
 	{'Holy Shock', 'lowest.health < 100', 'lowest'},
+	-- Bestow Faith
+	{'Bestow Faith', 'lowest.health < 100', 'lowest'},
 	--Light of the Martyr a potent emergency heal as long as you heave health to spare.
-	{'Light of the Martyr', {
+	{'!Light of the Martyr', {
 		'player.health > 40',
-		'lowest.health < 30'
+		(function() return E('lowest.health < '..F('G_LotM')) end)
 	}, 'lowest'},
 }
 
@@ -43,9 +74,10 @@ local Tank = {
 }
 
 local Moving = {
-	{'Bestow Faith', 'lowest.health < 100', 'lowest'},
 	--Holy Shock use on cooldown to generate Infusion of Light procs.
 	{'Holy Shock', 'lowest.health < 100', 'lowest'},
+	-- Bestow Faith
+	{'Bestow Faith', 'lowest.health < 100', 'lowest'},
 }
 
 local Lowest = {
@@ -53,10 +85,16 @@ local Lowest = {
 	--Flash of Light use as an emergency heal to save players facing death.
 	{'Flash of Light', 'lowest.health < 50', 'lowest'},
 	--Holy Light use to heal moderate to high damage.
-	{'Holy Light', 'lowest.health < 100', 'lowest'}
+	{'Holy Light', (function() return E('lowest.health < '..F('L_HL')) end), 'lowest'}
+}
+
+local DPS = {
+	{'Judgment'},
+	{'Crusader Strike'}
 }
 
 local outCombat = {
+	{Keybinds},
 	{Moving},
 	{{ -- Not moving
 		{'Holy Light', 'lowest.health < 100', 'lowest'}
@@ -65,6 +103,8 @@ local outCombat = {
 
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
+		{Keybinds},
+		{DPS, {'toggle.dps', 'target.enemie', '!lowest.health < 70'}},
 		{{ -- Not moving
 			{FastHeals},
 			{Tank},
