@@ -104,7 +104,7 @@ local outCombat = {
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
 		{Keybinds},
-		{DPS, {'toggle.dps', 'target.enemie', '!lowest.health < 70'}},
+		{DPS, {'toggle.dps', '!lowest.health < 70'}},
 		{{ -- Not moving
 			{FastHeals},
 			{Tank},
