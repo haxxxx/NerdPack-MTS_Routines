@@ -47,7 +47,7 @@ local ST = {
 }
 
 local Keybinds = {
-	{'pause', 'modifier.alt'},
+	{'%pause', 'modifier.alt'},
 	{'Death and Decay', 'modifier.shift', 'mouseover.ground'},
 }
 

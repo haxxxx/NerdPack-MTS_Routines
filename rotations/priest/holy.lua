@@ -22,7 +22,7 @@ local lib = function()
 end
 
 local keybinds = {
-	{'pause', 'modifier.shift'},
+	{'%pause', 'modifier.shift'},
 	{'Angelic Fearther', 'modifier.control'}
 }
 

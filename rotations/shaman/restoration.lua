@@ -109,7 +109,7 @@ local Lowest = {
 
 local Keybinds = {
 	-- Pause
-	{'pause', 'modifier.alt'},
+	{'%pause', 'modifier.alt'},
 	--Healing Rain used to heal heavy area damage.
 	{'Healing Rain', 'modifier.shift', 'mouseover.ground'}
 }

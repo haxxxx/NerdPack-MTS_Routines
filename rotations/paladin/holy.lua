@@ -46,12 +46,13 @@ local lib = function()
 end
 
 local keybinds = {
-	{'pause', 'modifier.alt'}
+	{'%pause', 'modifier.alt'}
 }
 
 local FastHeals = {
 	{'!Lay on Hands', (function() return E('lowest.health < '..F('G_LoH')) end), 'lowest'},
-	--{'Cleanse', 'dispellAll(Cleanse)'},
+	-- Automated Dispels
+	{'%dispelall'},
 	{{--Consume Infusion of Light procs using the appropriate heal before your next Holy Shock
 		{'Flash of Light', 'lowest.health < 60', 'lowest'},
 		{'Holy Light', 'lowest.health < 100', 'lowest'}
