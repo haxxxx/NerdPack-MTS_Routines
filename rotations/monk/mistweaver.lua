@@ -1,4 +1,4 @@
-local mKey = 'MTSMonkWind'
+local mKey = 'MTS_Monk_Mist'
 local config = {
 	key = mKey,
 	profiles = true,
