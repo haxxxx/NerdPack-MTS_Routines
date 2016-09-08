@@ -32,7 +32,7 @@
   <Script file="rotations\monk\mistweaver.lua" />
   <Script file="rotations\monk\brewmaster.lua" />
   <Script file="rotations\warrior\fury.lua" />
-  <Script file="rotations\warrior\prot.lua" />
+  <Script file="rotations\warrior\protection.lua" />
   <Script file="rotations\warrior\arms.lua" />
   <Script file="rotations\priest\discipline.lua" />
   <Script file="rotations\priest\shadow.lua" />
