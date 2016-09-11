@@ -80,7 +80,7 @@ local Moving = {
 }
 
 local Lowest = {
-	{'Light of Dawn', {'toggle.AoE', 'HealInfront(80, 2, 15)'}},
+	{'Light of Dawn', {'toggle(AoE)', 'HealInfront(80, 2, 15)'}},
 	--Flash of Light use as an emergency heal to save players facing death.
 	{'Flash of Light', 'lowest.health < 50', 'lowest'},
 	--Holy Light use to heal moderate to high damage.
@@ -104,7 +104,7 @@ local outCombat = {
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
 		{Keybinds},
-		{DPS, {'toggle.dps', '!lowest.health < 70', 'target.enemy'}},
+		{DPS, {'toggle(dps)', '!lowest.health < 70', 'target.enemy'}},
 		{Moving, 'player.moving'},
 		{{ -- Not moving
 			{FastHeals},

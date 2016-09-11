@@ -65,6 +65,6 @@ NeP.Engine.registerRotation(260, '[|cff'..MTS.Interface.addonColor..'MTS|r] Rogu
 		{Keybinds},
 		{Survival, 'player.health < 100'},
 		{Cooldowns, 'modifier.cooldowns'},
-		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
+		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)

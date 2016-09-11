@@ -74,7 +74,7 @@ local Tank = {
 		{'Healing Rain', {(function() return F('G_HR') end), 'player.advanced'}, 'tank.ground'},
 		--Chain Heal used to heal moderate to high damage. Provides Tidal Waves.
 		{'Chain Heal', (function() return F('G_CH') end), 'tank'}
-	}, {'toggle.AoE', 'tank.area(40).friendly >= 3', 'AoEHeal(80, 3)'} }
+	}, {'toggle(AoE)', 'tank.area(40).friendly >= 3', 'AoEHeal(80, 3)'} }
 }
 
 local Player = {
@@ -87,7 +87,7 @@ local Player = {
 		{'Healing Rain', {(function() return F('G_HR') end), 'player.advanced'}, 'player.ground'},
 		--Chain Heal used to heal moderate to high damage. Provides Tidal Waves.
 		{'Chain Heal', (function() return F('G_CH') end), 'player'}
-	}, {'toggle.AoE', 'player.area(40).friendly >= 3', 'AoEHeal(80, 3)'} }
+	}, {'toggle(AoE)', 'player.area(40).friendly >= 3', 'AoEHeal(80, 3)'} }
 }
 
 local Lowest = {
@@ -101,7 +101,7 @@ local Lowest = {
 		{'Healing Rain', {(function() return F('G_HR') end), 'player.advanced'}, 'lowest.ground'},
 		--Chain Heal used to heal moderate to high damage. Provides Tidal Waves.
 		{'Chain Heal', (function() return F('G_CH') end), 'lowest'}
-	}, {'toggle.AoE', 'lowest.area(40).friendly >= 3', 'AoEHeal(80, 3)'} },
+	}, {'toggle(AoE)', 'lowest.area(40).friendly >= 3', 'AoEHeal(80, 3)'} },
 	
 	--Healing Wave used to heal moderate to high damage. Consumes Tidal Waves.
 	{'Healing Wave', (function() return E('lowest.health < '..F('L_HW')) end), 'lowest'}
@@ -126,5 +126,5 @@ NeP.Engine.registerRotation(264, '[|cff'..MTS.Interface.addonColor..'MTS|r] Sham
 		{Tank, {'tank.exists', 'tank.health < 100'}},
 		{Player, 'player.health < 100'},
 		{Lowest, 'lowest.health < 100'},
-		{DPS, 'toggle.dps'}
+		{DPS, 'toggle(dps)'}
 	}, outCombat, exeOnLoad)

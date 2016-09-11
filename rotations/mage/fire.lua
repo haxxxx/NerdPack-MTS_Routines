@@ -73,6 +73,6 @@ NeP.Engine.registerRotation(63, '[|cff'..MTS.Interface.addonColor..'MTS|r] Mage 
 		{Survival, 'player.health < 100'},
 		{Moving, 'player.moving'},
 		{Cooldowns, 'modifier.cooldowns'},
-		{AoE, {'toggle.AoE', 'player.area(8).enemies >= 3'}},
+		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 		{ST, {'target.range <= 40', 'target.infront'}}
 	}, outCombat, exeOnLoad)
