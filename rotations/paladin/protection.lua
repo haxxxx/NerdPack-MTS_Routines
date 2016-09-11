@@ -48,12 +48,12 @@ local AoE = {
 local ST = {
 	--Shield of the Righteous to reduce damage taken.
 	{'Shield of the Righteous', {
-		'!player.buff(Shield of the Righteous)', 
+		'!player.buff', 
 		'player.health < 90',
 		'player.buff(Consecration)'
 	}},
 	{'Shield of the Righteous', {
-		'!player.buff(Shield of the Righteous)', 
+		'!player.buff', 
 		'player.health < 60',
 	}},
 	--Judgment on cooldown to further reduce the cooldown of Shield of the Righteous.
