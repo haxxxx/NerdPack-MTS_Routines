@@ -46,7 +46,7 @@ local InCombat = {
 
 local Keybinds = {
 	-- Pause
-	--{'%pause', 'modifier.alt'},
+	--{'%pause', 'keybind.alt'},
 }
 
 local outCombat = {

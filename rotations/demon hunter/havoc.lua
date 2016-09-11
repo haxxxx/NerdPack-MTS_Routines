@@ -30,7 +30,7 @@ local Interrupts = {
 }
 
 local Keybinds = {
-	{'%pause', 'modifier.alt'}
+	{'%pause', 'keybind.alt'}
 }
 
 local Cooldowns = {
@@ -46,7 +46,7 @@ local inCombat = {
 }
 
 local outCombat = {
-	{'%pause(test)', 'modifier.shift'},
+	{'%pause(test)', 'keybind.shift'},
 	{'#trinket1'},
 	{Keybinds}
 }

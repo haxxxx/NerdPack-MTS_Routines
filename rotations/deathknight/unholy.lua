@@ -47,8 +47,8 @@ local ST = {
 }
 
 local Keybinds = {
-	{'%pause', 'modifier.alt'},
-	{'Death and Decay', 'modifier.shift', 'mouseover.ground'},
+	{'%pause', 'keybind.alt'},
+	{'Death and Decay', 'keybind.shift', 'mouseover.ground'},
 }
 
 local outCombat = {
@@ -59,7 +59,7 @@ NeP.Engine.registerRotation(252, '[|cff'..MTS.Interface.addonColor..'MTS|r] Deat
 	{-- In-Combat
 		{Keybinds},
 		{Survival, 'player.health < 100'},
-		{Cooldowns, 'modifier.cooldowns'},
+		{Cooldowns, 'toggle(cooldowns)'},
 		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)

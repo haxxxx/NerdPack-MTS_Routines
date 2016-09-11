@@ -63,7 +63,7 @@ local ST = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'modifier.alt'},
+	{'%pause', 'keybind.alt'},
 }
 
 local outCombat = {
@@ -74,7 +74,7 @@ NeP.Engine.registerRotation(103, '[|cff'..MTS.Interface.addonColor..'MTS|r] Drui
 	{-- In-Combat
 		{Keybinds},
 		{Survival, 'player.health < 100'},
-		{Cooldowns, 'modifier.cooldowns'},
+		{Cooldowns, 'toggle(cooldowns)'},
 		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 		{ST, {'target.range < 8', 'target.infront'}}
 	}, outCombat, exeOnLoad)

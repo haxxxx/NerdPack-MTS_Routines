@@ -55,7 +55,7 @@ local ST = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'modifier.alt'},
+	{'%pause', 'keybind.alt'},
 }
 
 local outCombat = {
@@ -66,7 +66,7 @@ NeP.Engine.registerRotation(253, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunt
 	{-- In-Combat
 		{Keybinds},
 		{Survival, 'player.health < 100'},
-		{Cooldowns, 'modifier.cooldowns'},
+		{Cooldowns, 'toggle(cooldowns)'},
 		{pet, {'pet.exists', 'pet.alive'}},
 		{AoE, {'toggle(AoE)', 'player.area(40).enemies >= 3'}},
 		{ST, {'target.range < 40', 'target.infront'}}
