@@ -19,11 +19,9 @@ local config = {
 		{type = 'ruler'},{type = 'spacer'},
 		{type = 'header', text = 'Tank', align = 'center'},
 
-		
 		{type = 'ruler'},{type = 'spacer'},
 		{type = 'header', text = 'Player', align = 'center'},
 
-		
 		{type = 'ruler'},{type = 'spacer'},
 		{type = 'header', text = 'Lowest', align = 'center'},
 		{type = 'spinner', text = 'Holy Light (Health %)', key = 'L_HL', default = 100},
@@ -90,8 +88,9 @@ local Lowest = {
 }
 
 local DPS = {
-	{'Judgment'},
-	{'Crusader Strike'}
+	{'Judgment', nil, 'target'},
+	{'Holy Shock', nil, 'target'},
+	{'Crusader Strike', nil, 'target'}
 }
 
 local outCombat = {
@@ -105,11 +104,11 @@ local outCombat = {
 NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
 	{-- In-Combat
 		{Keybinds},
-		{DPS, {'toggle.dps', '!lowest.health < 70'}},
+		{DPS, {'toggle.dps', '!lowest.health < 70', 'target.enemy'}},
+		{Moving, 'player.moving'},
 		{{ -- Not moving
 			{FastHeals},
 			{Tank},
 			{Lowest, 'lowest.health < 100'}
-		}, '!player.moving' },
-		{Moving}
+		}, '!player.moving' }
 	}, outCombat, lib)

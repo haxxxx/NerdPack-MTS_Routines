@@ -40,7 +40,7 @@ local Cooldowns = {
 local inCombat = {
 	{'Vengeful Retreat', {'target.range <= 6', 'player.spell(Fel Rush).charges >= 2', 'player.fury <= 85'}},
 	{'Fel Rush', {'player.spell(Fel Rush).charges >= 2', 'target.range > 5'}},
-	{'Blade Dance', {'toggle.AoE', 'player.area(8).enemies >= 4'}},
+	{'Blade Dance', {'toggle(AoE)', 'player.area(8).enemies >= 4'}},
 	{'Chaos Strike', 'player.fury >= 70'},
 	{'Demon\'s Bite'},
 }
@@ -56,6 +56,6 @@ NeP.Engine.registerRotation(577, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demo
 		{Keybinds},
 		{Survival, 'player.health < 100'},
 		{Interrupts, 'target.interruptsAt(50)'},
-		{Cooldowns, 'toggle.cooldowns'},
+		{Cooldowns, 'toggle(cooldowns)'},
 		{inCombat, 'target.infront'}
 	}, outCombat, exeOnLoad)
