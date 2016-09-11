@@ -44,7 +44,7 @@ local lib = function()
 end
 
 local keybinds = {
-	{'%pause', 'keybind.alt'}
+	{'%pause', 'keybinds(alt)'}
 }
 
 local FastHeals = {

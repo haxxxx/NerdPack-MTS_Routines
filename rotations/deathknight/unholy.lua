@@ -47,8 +47,8 @@ local ST = {
 }
 
 local Keybinds = {
-	{'%pause', 'keybind.alt'},
-	{'Death and Decay', 'keybind.shift', 'mouseover.ground'},
+	{'%pause', 'keybinds(alt)'},
+	{'Death and Decay', 'keybinds(shift)', 'mouseover.ground'},
 }
 
 local outCombat = {

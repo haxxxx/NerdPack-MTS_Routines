@@ -22,8 +22,8 @@ local lib = function()
 end
 
 local keybinds = {
-	{'%pause', 'keybind.shift'},
-	{'Angelic Fearther', 'keybind.control'}
+	{'%pause', 'keybinds(shift)'},
+	{'Angelic Fearther', 'keybinds(control)'}
 }
 
 local SpiritOfRedemption = {

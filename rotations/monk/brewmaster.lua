@@ -48,8 +48,8 @@ local ST = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'keybind.alt'},
-	{'Summon Black Ox Statue', 'keybind.shift', 'mouseover.ground'}
+	{'%pause', 'keybinds(alt)'},
+	{'Summon Black Ox Statue', 'keybinds(shift)', 'mouseover.ground'}
 }
 
 local outCombat = {
