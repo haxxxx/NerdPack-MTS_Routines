@@ -40,7 +40,7 @@ local InCombat = {
 	--Envenom to dump excess Combo Points.
 	{'Envenom', 'player.combopoints >= 5'},
 	--Mutilate or  to build Combo Points.
-	{'Fan of Knives', {'toggle.aoe', 'player.area(8).enemies >= 3'}},
+	{'Fan of Knives', {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 	{'Mutilate'},
 }
 

@@ -41,7 +41,7 @@ local ST = {
 	--Shadowstrike when available to build Combo Points.
 	{'Shadowstrike'},
 	--Backstab or Shuriken Storm to build Combo Points.
-	{'Shuriken Storm', {'toggle.aoe', 'player.area(8).enemies >= 3'}},
+	{'Shuriken Storm', {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
 	{'Backstab'}
 }
 
