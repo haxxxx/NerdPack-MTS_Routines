@@ -41,8 +41,8 @@ NeP.library.register('MTS', {
 	HolyNova = function(units)
 		local minHeal = GetSpellBonusDamage(2) * 1.125
 		local total = 0
-		for i=1,#NeP.OM.unitFriend do
-			local Obj = NeP.OM.unitFriend[i]
+		for i=1,#NeP.OM['unitFriend'] do
+			local Obj = NeP.OM['unitFriend'][i]
 			if Obj.distance <= 12 then
 				if max(0, Obj.maxHealth - Obj.actualHealth) > minHeal then
 					total = total + 1
@@ -55,8 +55,8 @@ NeP.library.register('MTS', {
 	instaKill = function(health)
 		local Spell = NeP.Engine.Current_Spell
 		if NeP.DSL.Conditions['toggle']('ADots') then
-			for i=1,#NeP.OM.unitEnemie do
-				local Obj = NeP.OM.unitEnemie[i]
+			for i=1,#NeP.OM['unitEnemie'] do
+				local Obj = NeP.OM['unitEnemie'][i]
 				if NeP.DSL.Conditions['health'](Obj.key) <= health then
 					if IsSpellInRange(Spell, Obj.key)
 					and NeP.Engine.Infront('player', Obj.key)
@@ -82,8 +82,8 @@ NeP.library.register('MTS', {
 		local Spell = "Execute"
 		if not IsUsableSpell(Spell) then return false end
 
-		for i=1,#NeP.OM.unitEnemie do
-			local Obj = NeP.OM.unitEnemie[i]
+		for i=1,#NeP.OM['unitEnemie'] do
+			local Obj = NeP.OM['unitEnemie'][i]
 
 			-- exclude the ones we can't hit
 			if Obj.distance > 5 then
@@ -107,8 +107,8 @@ NeP.library.register('MTS', {
 		local currentApplications = 0
 
 		-- loop through all enemies and check if they have rend
-		for i=1,#NeP.OM.unitEnemie do
-			local Obj = NeP.OM.unitEnemie[i]
+		for i=1,#NeP.OM['unitEnemie'] do
+			local Obj = NeP.OM['unitEnemie'][i]
 			if (UnitAffectingCombat(Obj.key) or Obj.is == 'dummy') then
 				if UnitDebuff(Obj.key, Spell, nil, 'PLAYER') then
 					currentApplications = currentApplications + 1
@@ -120,8 +120,8 @@ NeP.library.register('MTS', {
 		if currentApplications >= maxApplications then
 			return false
 		else
-			for i=1,#NeP.OM.unitEnemie do
-				local Obj = NeP.OM.unitEnemie[i]
+			for i=1,#NeP.OM['unitEnemie'] do
+				local Obj = NeP.OM['unitEnemie'][i]
 
 				-- exclude the ones that we can't hit
 				if Obj.distance > 5 then
@@ -151,8 +151,8 @@ NeP.library.register('MTS', {
 		local SpellcastingTime = SpellcastingTime * 0.001
 
 		if NeP.DSL.Conditions['toggle']('ADots') then
-			for i=1,#NeP.OM.unitEnemie do
-				local Obj = NeP.OM.unitEnemie[i]
+			for i=1,#NeP.OM['unitEnemie'] do
+				local Obj = NeP.OM['unitEnemie'][i]
 				if (UnitAffectingCombat(Obj.key) or Obj.is == 'dummy') then
 					local _,_,_,_,_,_,debuffDuration = UnitDebuff(Obj.key, Spell, nil, 'PLAYER')
 					if not debuffDuration or debuffDuration - GetTime() < refreshAt then
