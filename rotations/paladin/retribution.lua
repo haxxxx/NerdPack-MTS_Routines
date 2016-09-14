@@ -114,15 +114,15 @@ local virtues_blade = {
 	{'Consecration'},
 	{{
 		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.divine_purpose.react
-		{'Divine Storm', {'area(6).enemies >= 2', 'player.buff(Divine Purpose)'}},
+		{'Divine Storm', {'player.area(6).enemies >= 2', 'player.buff(Divine Purpose)'}},
 		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.the_fires_of_justice.react&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
 		{'Divine Storm', {
-			'area(6).enemies >= 2', 'player.buff(The Fires of Justice)', 
+			'player.area(6).enemies >= 2', 'player.buff(The Fires of Justice)', 
 			{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}
 		}},
 		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&holy_power>=4&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
 		{'Divine Storm', {
-			'area(6).enemies >= 2', 'player.holypower >= 4', 
+			'player.area(6).enemies >= 2', 'player.holypower >= 4', 
 			{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}
 		}},
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
@@ -140,9 +140,9 @@ local virtues_blade = {
 	{'Crusader Strike', 'player.holypower <= 4'},
 	{{
 		--actions.VB+=/divine_storm,if=debuff.judgment.up&holy_power>=3&spell_targets.divine_storm>=2&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
-		{'Divine Storm', 'area(6).enemies >= 2', 'target'},
+		{'Divine Storm', 'player.area(6).enemies >= 2', 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
-		{'Templar\'s Verdict', nil, 'target'},
+		{'Templar\'s Verdict'},
 	}, {'target.debuff(Judgment)', 'player.holypower >= 3', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 5'}}},
 }
 
@@ -227,9 +227,9 @@ local inCombat = {
 	{Cooldowns, 'toggle(cooldowns)'},
 	{{
 		--actions+=/call_action_list,name=VB,if=talent.virtues_blade.enabled
-		{virtues_blade, 'talent(4,1)'}
+		{virtues_blade, 'talent(4,1)'},
 		--actions+=/call_action_list,name=BoW,if=talent.blade_of_wrath.enabled
-		{blade_of_wrath, 'talent(4,2)'}
+		{blade_of_wrath, 'talent(4,2)'},
 		--actions+=/call_action_list,name=DH,if=talent.divine_hammer.enabled
 		{divine_hammer, 'talent(4,3)'}
 	},{'target.range < 8', 'target.infront'}}
