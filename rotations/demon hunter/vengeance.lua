@@ -63,7 +63,7 @@ local ST = {
 	--actions+=/fel_eruption
 	{'Fel Eruption'},
 	--actions+=/sigil_of_flame,if=remains-delay<=0.3*duration
-	{'Sigil of Flame', {'advancedlua', 'totem.duration<=0.3*totem.time'}, 'target.ground'},
+	--{'Sigil of Flame', {'advancedlua', 'totem.duration<=0.3*totem.time'}, 'target.ground'},
 	--actions+=/fracture,if=pain>=80&soul_fragments<4&incoming_damage_4s<=health.max*0.20
 	{'Soul Cleave', {'player.pain>=80', 'player.buff(Soul Fragments).count<4', 'player.incdmg(4)<=player.maxhealth*0.20'}},
 	--actions+=/soul_cleave,if=pain>=80
