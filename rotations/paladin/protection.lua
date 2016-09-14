@@ -8,10 +8,7 @@ local config = {
 	width = 250,
 	height = 500,
 	config = {
-    	{type = 'spinner', text = 'Lay on Hands (Health %)', key = 'P_LH', default = 20},
-    	{type = 'spinner', text = 'Divine Protection (Health %)', key = 'P_DP', default = 90},
-    	{type = 'spinner', text = 'Ardent Defender (Health %)', key = 'P_AD', default = 30},
-    	{type = 'spinner', text = 'Light of the Protector (Health %)', key = 'P_LP', default = 30}
+
 	}
 }
 
