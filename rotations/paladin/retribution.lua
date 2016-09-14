@@ -30,10 +30,6 @@ local Interupts = {
 	{'Rebuke'}
 }
 
-
-
-
-
 local Cooldowns = {
 	--actions+=/potion,name=deadly_grace,if=(buff.bloodlust.react|buff.avenging_wrath.up|buff.crusade.up|target.time_to_die<=40)
 	--actions+=/use_item,name=faulty_countermeasure,if=(buff.avenging_wrath.up|buff.crusade.up)
@@ -69,7 +65,7 @@ local virtues_blade = {
 			{'Divine Storm', 'player.holypower >= 5', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}, 'target'},
 		}, 'player.area(6).enemies >= 2' },
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2&!equipped.whisper_of_the_nathrezim
-		{'Justicars Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}, 'target'},
+		{'Justicar\'s Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}, 'target'},
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=5&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
 			-- NOT NEEDED!
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2
@@ -86,7 +82,7 @@ local virtues_blade = {
 				{'!talent(7,2)', 'or', 'spell(Crusade).duration > gcd * 4'}
 			}, 'target' },
 			--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=3&buff.divine_purpose.up&cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled&!equipped.whisper_of_the_nathrezim
-			{'Justicars Vengeance', {'spell(Wake of Ashes).duration < gcd * 2', '!equipped(Whisper of the Nathrezim)'}},
+			{'Justicar\'s Vengeance', {'spell(Wake of Ashes).duration < gcd * 2', '!equipped(Whisper of the Nathrezim)'}},
 			--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled|buff.whisper_of_the_nathrezim.up&buff.whisper_of_the_nathrezim.remains<gcd)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
 			{'Templar\'s Verdict', {
 				{'spell(Wake of Ashes).duration < gcd * 2', 'or', 'player.buff(Whisper of the Nathrezim).duration < gcd'},
@@ -130,7 +126,7 @@ local virtues_blade = {
 			{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}
 		}},
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
-		{'Justicars Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}},
+		{'Justicar\'s Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.react
 		{'Templar\'s Verdict', 'player.buff(Divine Purpose)', 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.the_fires_of_justice.react&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
