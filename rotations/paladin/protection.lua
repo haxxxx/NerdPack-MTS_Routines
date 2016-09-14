@@ -40,7 +40,7 @@ local Survival = {
 	{'Seraphim', 'spell(Shield of the Righteous).charges >= 2'},
 	--actions.prot+=/shield_of_the_righteous,if=(!talent.seraphim.enabled|action.shield_of_the_righteous.charges>2)&!(debuff.eye_of_tyr.up&buff.aegis_of_light.up&buff.ardent_defender.up&buff.guardian_of_ancient_kings.up&buff.divine_shield.up&buff.potion.up)
 	{'Shield of the Righteous', {
-		{'!talent(7,2)', 'or', 'spell(Shield of the Righteous).charges > 2'},
+		'!talent(7,2)', 'or', 'spell(Shield of the Righteous).charges > 2',
 		{'!player.debuff(Eye of Tyr)', '!player.buff(Aegis of Light)', '!player.buff(Ardent Defender)', '!player.buff(Guardian of Ancient Kings)', '!player.buff(Divine Shield)'}
 	}, 'target' },
 	--actions.prot+=/bastion_of_light,if=talent.bastion_of_light.enabled&action.shield_of_the_righteous.charges<1

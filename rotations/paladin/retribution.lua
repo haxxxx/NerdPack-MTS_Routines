@@ -26,25 +26,96 @@ local Survival = {
 	--{'Flash of Light', 'player.health <= 40'},
 }
 
-local Cooldowns = {
-	{'Crusade'},
-	{'Avenging Wrath'}
-}
-
-local AoE = {
-	--Divine Storm to spend Holy Power.
-	{'Divine Storm'}
-}
-
 local ST = {
-	--Templar's Verdict with >= 5 Holy Power.
-	{'Templar\'s Verdict', 'player.holypower >= 5'},
-	--Judgment to build Holy Power.
-	{'Judgment'},
-	--Blade of Justice with 3 or less Holy Power.
-	{'Blade of Justice', 'player.holypower <= 3'},
-	--Crusader Strike with 4 or less Holy Power.
-	{'Crusader Strike', 'player.holypower <= 4'}
+	{{
+		{{
+			--actions.VB=divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2
+			{'Divine Storm', 'player.buff(Divine Purpose).duration < gcd * 2', 'target'},
+			--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&holy_power>=5&buff.divine_purpose.react
+			{'Divine Storm', {'player.holypower >= 5', 'player.buff(Divine Purpose)'}, 'target'},
+			--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&holy_power>=5&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
+			{'Divine Storm', 'player.holypower >= 5', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}, 'target'},
+		}, 'player.area(6).enemies >= 2' },
+		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2&!equipped.whisper_of_the_nathrezim
+		{'Justicars Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}, 'target'},
+		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=5&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
+			-- NOT NEEDED!
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2
+		{'Templars Verdict', 'player.buff(Divine Purpose).duration < gcd * 2', 'target'},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=5&buff.divine_purpose.react
+		{'Templars Verdict', {'player.holypower >= 5', 'player.buff(Divine Purpose)'}, 'target'},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=5&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
+		{'Templars Verdict', {'player.holypower >= 5', {'!talent(7,2)', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
+		{{
+			--actions.VB+=/divine_storm,if=debuff.judgment.up&holy_power>=3&spell_targets.divine_storm>=2&(cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled|buff.whisper_of_the_nathrezim.up&buff.whisper_of_the_nathrezim.remains<gcd)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
+			{'Divine Storm', {
+				'player.area(6).enemies >= 2',
+				{'spell(Wake of Ashes).duration < gcd * 2', 'or', 'player.buff(Whisper of the Nathrezim).duration < gcd'},
+				{'!talent(7,2)', 'or', 'spell(Crusade).duration > gcd * 4'}
+			}, 'target' },
+			--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=3&buff.divine_purpose.up&cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled&!equipped.whisper_of_the_nathrezim
+			{'Justicars Vengeance', {'spell(Wake of Ashes).duration < gcd * 2', '!equipped(Whisper of the Nathrezim)'}},
+			--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled|buff.whisper_of_the_nathrezim.up&buff.whisper_of_the_nathrezim.remains<gcd)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
+			{'Templars Verdict', {
+				{'spell(Wake of Ashes).duration < gcd * 2', 'or', 'player.buff(Whisper of the Nathrezim).duration < gcd'},
+				{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}
+			}, 'target', },
+		}, 'player.holypower >= 3'},
+	}, 'target.debuff(Judgment)' },
+	--actions.VB+=/wake_of_ashes,if=holy_power=0|holy_power=1&cooldown.blade_of_justice.remains>gcd|holy_power=2&(cooldown.zeal.charges_fractional<=0.34|cooldown.crusader_strike.charges_fractional<=0.34)
+	{'Wake of Ashes', {
+		'player.holypower == 0', 'or', 'player.holypower = 1', 'spell(Blade of Justice).cooldown > gcd', 'or', 'player.holypower = 2',
+		{'spell(Zeal).charges <= 0.34', 'or', 'spell(Crusader Strike).charges <= 0.34'}
+	}},
+	--actions.VB+=/zeal,if=charges=2&holy_power<=4
+	{'Zeal', {'spell.charges = 2', 'player.holypower <= 4'}},
+	--actions.VB+=/crusader_strike,if=charges=2&holy_power<=4
+	{'Crusader Strike', {'spell.charges = 2', 'player.holypower <= 4'}},
+	--actions.VB+=/blade_of_justice,if=holy_power<=2|(holy_power<=3&(cooldown.zeal.charges_fractional<=1.34|cooldown.crusader_strike.charges_fractional<=1.34))
+	{'Blade of Justice', {
+		'player.holypower <= 2', 'or',
+		{'player.holypower <= 3', {'spell(Zeal).charges <= 1.34', 'or', 'spell(Crusader Strike).charges <= 1.34'}}
+	}},
+	--actions.VB+=/judgment,if=holy_power>=3|((cooldown.zeal.charges_fractional<=1.67|cooldown.crusader_strike.charges_fractional<=1.67)&cooldown.blade_of_justice.remains>gcd)|(talent.greater_judgment.enabled&target.health.pct>50)
+	{'Judgment', {
+		'player.holypower >= 3', 'or',
+		{{'spell(Zeal).charges <= 1.67', 'or', 'spell(Crusader Strike).charges <= 1.67'}, 'spell(Blade of Justice).cooldown > gcd'},
+		'or', {'talent(2,3)', 'target.health > 50'}
+	},'target'},
+	--actions.VB+=/consecration
+	{'Consecration'},
+	{{
+		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.divine_purpose.react
+		{'Divine Storm', {'area(6).enemies >= 2', 'player.buff(Divine Purpose)'}},
+		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.the_fires_of_justice.react&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
+		{'Divine Storm', {
+			'area(6).enemies >= 2', 'player.buff(The Fires of Justice)', 
+			{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}
+		}},
+		--actions.VB+=/divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&holy_power>=4&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
+		{'Divine Storm', {
+			'area(6).enemies >= 2', 'player.holypower >= 4', 
+			{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}
+		}},
+		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
+		{'Justicars Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.react
+		{'Templars Verdict', 'player.buff(Divine Purpose)', 'target'},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.the_fires_of_justice.react&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
+		{'Templars Verdict', {'player.buff(The Fires of Justice)', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=4&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
+		{'Templars Verdict', {'player.holypower >= 4', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}}, 'target'},
+	},'target.debuff(Judment)'},
+	--actions.VB+=/zeal,if=holy_power<=4
+	{'Zeal', 'player.holypower <= 4'},
+	--actions.VB+=/crusader_strike,if=holy_power<=4
+	{'crusader_strike', 'player.holypower <= 4'},
+	{{
+		--actions.VB+=/divine_storm,if=debuff.judgment.up&holy_power>=3&spell_targets.divine_storm>=2&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
+		{'Divine Storm', 'area(6).enemies >= 2', 'target'},
+		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
+		{'Templars Verdict', nil, 'target'},
+	}, {'target.debuff(Judgment)', 'player.holypower >= 3', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 5'}}},
 }
 
 local Keybinds = {
@@ -62,11 +133,11 @@ local outCombat = {
 	{'203538', '!player.buff(203538).any', 'player'}
 }
 
-NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', 
-	{-- In-Combat
-		{Keybinds},
-		{Survival, 'player.health < 100'},
-		{Cooldowns, 'toggle(cooldowns)'},
-		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
-		{ST, {'target.range < 8', 'target.infront'}}
-	}, outCombat, exeOnLoad)
+local inCombat = {
+	{Keybinds},
+	{Survival, 'player.health < 100'},
+	{Cooldowns, 'toggle(cooldowns)'},
+	{ST, {'target.range < 8', 'target.infront'}}
+}
+
+NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', inCombat, outCombat, exeOnLoad)
