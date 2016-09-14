@@ -27,10 +27,15 @@ end
 local Mitigation = {
 	--actions.prot+=/divine_steed,if=talent.knight_templar.enabled&incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
 	--actions.prot+=/eye_of_tyr,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
+	{'Eye of Tyr'},
 	--actions.prot+=/aegis_of_light,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
+	{'aegis_of_light'},
 	--actions.prot+=/guardian_of_ancient_kings,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
+	{'Guardian of Ancient Kings'},
 	--actions.prot+=/divine_shield,if=talent.final_stand.enabled&incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
+	{'divine_shield'},
 	--actions.prot+=/ardent_defender,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
+	{'Ardent Defender'}
 }
 
 local Survival = {
@@ -55,7 +60,7 @@ local Survival = {
 	--actions.prot+=/hand_of_the_protector,if=(incoming_damage_6000ms<health.max*0.7)&health.pct<65&talent.righteous_protector.enabled
 	--actions.prot+=/hand_of_the_protector,if=(incoming_damage_9000ms<health.max*1.2)&health.pct<55
 
-	{Mitigation, {'!player.debuff(Eye of Tyr)', '!player.buff(Aegis of Light)', '!player.buff(Ardent Defender)', '!player.buff(Guardian of Ancient Kings)', '!player.buff(Divine Shield)'}},
+	{Mitigation, {'player.incdmg(2.5) > player.health.max * 0.4', '!player.debuff(Eye of Tyr)', '!player.buff(Aegis of Light)', '!player.buff(Ardent Defender)', '!player.buff(Guardian of Ancient Kings)', '!player.buff(Divine Shield)'}},
 	
 	--actions.prot+=/lay_on_hands,if=health.pct<15
 	{'Lay on Hands', 'player.health < 15'},
