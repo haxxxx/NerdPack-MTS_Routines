@@ -26,6 +26,38 @@ local Survival = {
 	--{'Flash of Light', 'player.health <= 40'},
 }
 
+local Interupts = {
+	{'Rebuke'}
+}
+
+
+
+
+
+local Cooldowns = {
+	--actions+=/potion,name=deadly_grace,if=(buff.bloodlust.react|buff.avenging_wrath.up|buff.crusade.up|target.time_to_die<=40)
+	--actions+=/use_item,name=faulty_countermeasure,if=(buff.avenging_wrath.up|buff.crusade.up)
+	--actions+=/holy_wrath
+	{'Holy Wrath'},
+	--actions+=/avenging_wrath
+	{'Avenging Wrath'},
+	--actions+=/crusade,if=holy_power>=5
+	{'Crusade', 'player.holypower >= 5'},
+	--actions+=/wake_of_ashes,if=holy_power>=0&time<2
+	--actions+=/execution_sentence,if=spell_targets.divine_storm<=3&(cooldown.judgment.remains<gcd*4.5|debuff.judgment.remains>gcd*4.67)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*2)
+	{'Execution Sentence', {
+		'player.area(6).enemies <=3', 
+		{'spell(Judgment).cooldown < gcd * 4.5', 'or', 'target.debuff(judgment).duration > gcd * 4.5'},
+		{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 2'}
+	},'target'},
+	--actions+=/blood_fury
+	{'Blood Fury'},
+	--actions+=/berserking
+	{'berserking'},
+	--actions+=/arcane_torrent,if=holy_power<5
+	{'Arcane Torrent', 'player.holypower < 5'}
+}
+
 local ST = {
 	{{
 		{{
@@ -135,6 +167,7 @@ local outCombat = {
 
 local inCombat = {
 	{Keybinds},
+	{Interupts, 'target.interruptsAt(45)'},
 	{Survival, 'player.health < 100'},
 	{Cooldowns, 'toggle(cooldowns)'},
 	{ST, {'target.range < 8', 'target.infront'}}
