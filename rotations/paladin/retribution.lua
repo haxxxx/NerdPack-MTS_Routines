@@ -41,11 +41,11 @@ local ST = {
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=5&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
 			-- NOT NEEDED!
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2
-		{'Templars Verdict', 'player.buff(Divine Purpose).duration < gcd * 2', 'target'},
+		{'Templar\'s Verdict', 'player.buff(Divine Purpose).duration < gcd * 2', 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=5&buff.divine_purpose.react
-		{'Templars Verdict', {'player.holypower >= 5', 'player.buff(Divine Purpose)'}, 'target'},
+		{'Templar\'s Verdict', {'player.holypower >= 5', 'player.buff(Divine Purpose)'}, 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=5&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
-		{'Templars Verdict', {'player.holypower >= 5', {'!talent(7,2)', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
+		{'Templar\'s Verdict', {'player.holypower >= 5', {'!talent(7,2)', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
 		{{
 			--actions.VB+=/divine_storm,if=debuff.judgment.up&holy_power>=3&spell_targets.divine_storm>=2&(cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled|buff.whisper_of_the_nathrezim.up&buff.whisper_of_the_nathrezim.remains<gcd)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
 			{'Divine Storm', {
@@ -56,7 +56,7 @@ local ST = {
 			--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&holy_power>=3&buff.divine_purpose.up&cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled&!equipped.whisper_of_the_nathrezim
 			{'Justicars Vengeance', {'spell(Wake of Ashes).duration < gcd * 2', '!equipped(Whisper of the Nathrezim)'}},
 			--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(cooldown.wake_of_ashes.remains<gcd*2&artifact.wake_of_ashes.enabled|buff.whisper_of_the_nathrezim.up&buff.whisper_of_the_nathrezim.remains<gcd)&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
-			{'Templars Verdict', {
+			{'Templar\'s Verdict', {
 				{'spell(Wake of Ashes).duration < gcd * 2', 'or', 'player.buff(Whisper of the Nathrezim).duration < gcd'},
 				{'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}
 			}, 'target', },
@@ -100,21 +100,21 @@ local ST = {
 		--actions.VB+=/justicars_vengeance,if=debuff.judgment.up&buff.divine_purpose.react&!equipped.whisper_of_the_nathrezim
 		{'Justicars Vengeance', {'player.buff(Divine Purpose)', '!equipped(Whisper of the Nathrezim)'}},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.divine_purpose.react
-		{'Templars Verdict', 'player.buff(Divine Purpose)', 'target'},
+		{'Templar\'s Verdict', 'player.buff(Divine Purpose)', 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&buff.the_fires_of_justice.react&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*3)
-		{'Templars Verdict', {'player.buff(The Fires of Justice)', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
+		{'Templar\'s Verdict', {'player.buff(The Fires of Justice)', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 3'}}, 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=4&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*4)
-		{'Templars Verdict', {'player.holypower >= 4', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}}, 'target'},
+		{'Templar\'s Verdict', {'player.holypower >= 4', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 4'}}, 'target'},
 	},'target.debuff(Judment)'},
 	--actions.VB+=/zeal,if=holy_power<=4
 	{'Zeal', 'player.holypower <= 4'},
 	--actions.VB+=/crusader_strike,if=holy_power<=4
-	{'crusader_strike', 'player.holypower <= 4'},
+	{'Crusader Strike', 'player.holypower <= 4'},
 	{{
 		--actions.VB+=/divine_storm,if=debuff.judgment.up&holy_power>=3&spell_targets.divine_storm>=2&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
 		{'Divine Storm', 'area(6).enemies >= 2', 'target'},
 		--actions.VB+=/templars_verdict,if=debuff.judgment.up&holy_power>=3&(!talent.crusade.enabled|cooldown.crusade.remains>gcd*5)
-		{'Templars Verdict', nil, 'target'},
+		{'Templar\'s Verdict', nil, 'target'},
 	}, {'target.debuff(Judgment)', 'player.holypower >= 3', {'!talent(7,2)', 'or', 'spell(Crusade).cooldown > gcd * 5'}}},
 }
 
