@@ -55,7 +55,7 @@ NeP.Engine.registerRotation(577, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demo
 	{ -- In-Combat
 		{Keybinds},
 		{Survival, 'player.health < 100'},
-		{Interrupts, 'target.interruptsAt(50)'},
+		{Interrupts, 'target.interruptAt(50)'},
 		{Cooldowns, 'toggle(cooldowns)'},
 		{inCombat, 'target.infront'}
 	}, outCombat, exeOnLoad)

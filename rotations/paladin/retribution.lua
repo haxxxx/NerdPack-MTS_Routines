@@ -222,7 +222,7 @@ local outCombat = {
 
 local inCombat = {
 	{Keybinds},
-	{Interupts, 'target.interruptsAt(45)'},
+	{Interupts, 'target.interruptAt(45)'},
 	{Survival, 'player.health < 100'},
 	{Cooldowns, 'toggle(cooldowns)'},
 	{{

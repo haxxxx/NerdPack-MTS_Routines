@@ -74,7 +74,7 @@ local ST = {
 
 local inCombat = {
 	{Keybinds},
-	{Interrupts, 'target.interruptsAt(40)'},
+	{Interrupts, 'target.interruptAt(40)'},
 	{ST, 'target.infront'}
 }
 
