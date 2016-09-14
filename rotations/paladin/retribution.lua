@@ -58,7 +58,7 @@ local Cooldowns = {
 	{'Arcane Torrent', 'player.holypower < 5'}
 }
 
-local ST = {
+local virtues_blade = {
 	{{
 		{{
 			--actions.VB=divine_storm,if=debuff.judgment.up&spell_targets.divine_storm>=2&buff.divine_purpose.up&buff.divine_purpose.remains<gcd*2
@@ -170,7 +170,13 @@ local inCombat = {
 	{Interupts, 'target.interruptsAt(45)'},
 	{Survival, 'player.health < 100'},
 	{Cooldowns, 'toggle(cooldowns)'},
-	{ST, {'target.range < 8', 'target.infront'}}
+	{{
+		--actions+=/call_action_list,name=VB,if=talent.virtues_blade.enabled
+		{virtues_blade, 'talent(4,1)'}
+		--actions+=/call_action_list,name=BoW,if=talent.blade_of_wrath.enabled
+		--actions+=/call_action_list,name=DH,if=talent.divine_hammer.enabled
+	},{'target.range < 8', 'target.infront'}}
+	
 }
 
 NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', inCombat, outCombat, exeOnLoad)
