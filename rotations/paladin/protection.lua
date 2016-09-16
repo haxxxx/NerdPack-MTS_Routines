@@ -21,16 +21,20 @@ local exeOnLoad = function()
 	MTS.ClassSetting(mKey)
 end
 
+local Keybinds = {
+	{'%pause', 'keybind(alt)'}
+}
+
 local Mitigation = {
 	--actions.prot+=/divine_steed,if=talent.knight_templar.enabled&incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
 	--actions.prot+=/eye_of_tyr,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
 	{'Eye of Tyr'},
 	--actions.prot+=/aegis_of_light,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
-	{'aegis_of_light'},
+	{'Aegis of Light'},
 	--actions.prot+=/guardian_of_ancient_kings,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
 	{'Guardian of Ancient Kings'},
 	--actions.prot+=/divine_shield,if=talent.final_stand.enabled&incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
-	{'divine_shield'},
+	{'Divine Shield'},
 	--actions.prot+=/ardent_defender,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
 	{'Ardent Defender'}
 }
@@ -51,17 +55,13 @@ local Survival = {
 		--actions.prot+=/hand_of_the_protector,if=(health.pct<40)
 		{'Hand of the Protector'},
 	}, 'player.health < 40' },
-	
 	--actions.prot+=/light_of_the_protector,if=(incoming_damage_10000ms<health.max*1.25)&health.pct<55&talent.righteous_protector.enabled
 	--actions.prot+=/light_of_the_protector,if=(incoming_damage_13000ms<health.max*1.6)&health.pct<55
 	--actions.prot+=/hand_of_the_protector,if=(incoming_damage_6000ms<health.max*0.7)&health.pct<65&talent.righteous_protector.enabled
 	--actions.prot+=/hand_of_the_protector,if=(incoming_damage_9000ms<health.max*1.2)&health.pct<55
-
 	{Mitigation, {'player.incdmg(2.5) > player.health.max * 0.4', '!player.debuff(Eye of Tyr)', '!player.buff(Aegis of Light)', '!player.buff(Ardent Defender)', '!player.buff(Guardian of Ancient Kings)', '!player.buff(Divine Shield)'}},
-	
 	--actions.prot+=/lay_on_hands,if=health.pct<15
 	{'Lay on Hands', 'player.health < 15'},
-	
 	--actions.prot+=/potion,name=unbending_potion
 	--actions.prot+=/potion,name=draenic_strength,if=incoming_damage_2500ms>health.max*0.4&&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)|target.time_to_die<=25
 	--actions.prot+=/stoneform,if=incoming_damage_2500ms>health.max*0.4&!(debuff.eye_of_tyr.up|buff.aegis_of_light.up|buff.ardent_defender.up|buff.guardian_of_ancient_kings.up|buff.divine_shield.up|buff.potion.up)
@@ -99,6 +99,7 @@ local ST = {
 }
 
 local inCombat = {
+	{Keybinds},
 	{Survival, "player.health < 100"},
 	{Interrupts, 'target.interruptAt(50)'},
 	{Cooldowns, "toggle(cooldowns)"},
@@ -107,6 +108,7 @@ local inCombat = {
 }
 
 local outCombat = {
+	{Keybinds},
 	--# Executed before combat begins. Accepts non-harmful actions only.
 	--actions.precombat=flask,type=flask_of_ten_thousand_scars
 	--actions.precombat+=/flask,type=flask_of_the_countless_armies,if=role.attack|using_apl.max_dps
