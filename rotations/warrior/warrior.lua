@@ -1,6 +1,6 @@
 local Keybinds = {
 	{'Charge', {
-		'keybinds(shift)',
+		'keybind(shift)',
 		'target.range >= 8',
 		'target.range <= 25'
 	}, 'target'}

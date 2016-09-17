@@ -207,7 +207,7 @@ local divine_hammer = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'keybinds(alt)'},
+	{'%pause', 'keybind(alt)'},
 }
 
 local outCombat = {

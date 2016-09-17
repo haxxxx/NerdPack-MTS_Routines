@@ -53,7 +53,7 @@ local ST = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'keybinds(alt)'},
+	{'%pause', 'keybind(alt)'},
 }
 
 local outCombat = {

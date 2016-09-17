@@ -109,9 +109,9 @@ local Lowest = {
 
 local Keybinds = {
 	-- Pause
-	{'%pause', 'keybinds(alt)'},
+	{'%pause', 'keybind(alt)'},
 	--Healing Rain used to heal heavy area damage.
-	{'Healing Rain', 'keybinds(shift)', 'mouseover.ground'}
+	{'Healing Rain', 'keybind(shift)', 'mouseover.ground'}
 }
 
 local outCombat = {
