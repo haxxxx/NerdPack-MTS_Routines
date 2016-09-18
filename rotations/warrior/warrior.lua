@@ -6,12 +6,15 @@ local Keybinds = {
 	}, 'target'}
 }
 
-NeP.Engine.registerRotation(1, '[|cff'..MTS.Interface.addonColor..'MTS|r] Warrior - Basic', 
-{-- In-Combat CR
+local InCombat = {
 	{Keybinds},
 	{'Victory Rush'},
 	{'Execute', 'target.health <= 20'},
 	{'Slam'}
-},{-- Ouside of combat
+}
+
+local OutCombat = {
 	{Keybinds}
-}, exeOnLoad)
+}
+
+NeP.Engine.registerRotation(1, '[|cff'..MTS.Interface.addonColor..'MTS|r] Warrior - Basic', InCombat, OutCombat, exeOnLoad)
