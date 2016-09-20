@@ -23,7 +23,7 @@ local AoE = {
 	--actions.prot_aoe+=/neltharions_fury,if=buff.battle_cry.up
 	{'Neltharions Fury', 'buff(Battle Cry)'},
 	--actions.prot_aoe+=/shield_slam,if=!(cooldown.shield_block.remains<=gcd.max*2&!buff.shield_block.up&talent.heavy_repercussions.enabled)
-	{'Shield Slam', 'spell(Shield Block).cooldown<=gcd*2&!buff(Shield Block)&talent(7,1)'}
+	{'Shield Slam', 'spell(Shield Block).cooldown<=gcd*2&!buff(Shield Block)&talent(7,1)'},
 	--actions.prot_aoe+=/revenge
 	{'Revenge'},
 	--actions.prot_aoe+=/thunder_clap,if=spell_targets.thunder_clap>=3
