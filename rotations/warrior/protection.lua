@@ -32,7 +32,7 @@ local ST = {
 	{'Shield Block', '!buff(Neltharions)&{{spell(Shield Slam).cooldown<6&!buff}||{spell(Shield Slam).cooldown<6+buff.duration}}'},
 	--actions.prot+=/ignore_pain,if=(rage>=60&!talent.vengeance.enabled)||(buff.vengeance_ignore_pain.up&buff.ultimatum.up)||(buff.vengeance_ignore_pain.up&rage>=30)||(talent.vengeance.enabled&!buff.ultimatum.up&!buff.vengeance_ignore_pain.up&!buff.vengeance_focused_rage.up&rage<30)
 	--actions.prot+=/focused_rage,if=(buff.vengeance_focused_rage.up&!buff.vengeance_ignore_pain.up)||(buff.ultimatum.up&buff.vengeance_focused_rage.up&!buff.vengeance_ignore_pain.up)||(talent.vengeance.enabled&buff.ultimatum.up&!buff.vengeance_ignore_pain.up&!buff.vengeance_focused_rage.up)||(talent.vengeance.enabled&!buff.vengeance_ignore_pain.up&!buff.vengeance_focused_rage.up&rage>=30)||(buff.ultimatum.up&buff.vengeance_ignore_pain.up&cooldown.shield_slam.remains=0&rage<10)||(rage>=100)
-	{'Focused Rage', '{buff(Focused Rage)&!buff(Ignore Pain)}||{buff(Ultimatum)&buff(Focused Rage)&!buff(Ignore Pain)}||{talent(6,1)&buff(Ultimatum)&!buff(Ignore Pain)&!buff(Focused Rage)}||{talent(6,1)&!buff(Ignore Pain)&!buff(Focused Rage)&rage>=30}||{buff(Ultimatum)&buff(Ignore Pain)&spell(Shield Slam)&rage<10}||{rage>=100}'},
+	{'Vengeance: Focused Rage', '{buff(Vengeance: Focused Rage)&!buff(Vengeance: Ignore Pain)}||{buff(Ultimatum)&buff(Vengeance: Focused Rage)&!buff(Vengeance: Ignore Pain)}||{talent(6,1)&buff(Ultimatum)&!buff(Vengeance: Ignore Pain)&!buff(Vengeance: Focused Rage)}||{talent(6,1)&!buff(Vengeance: Ignore Pain)&!buff(Vengeance: Focused Rage)&rage>=30}||{buff(Ultimatum)&buff(Vengeance: Ignore Pain)&spell(Shield Slam)&rage<10}||{rage>=100}'},
 	--actions.prot+=/demoralizing_shout,if=incoming_damage_2500ms>health.max*0.20
 	{'Demoralizing Shout', 'incdmg(2.5)>health.max*0.20'},
 	--actions.prot+=/shield_wall,if=incoming_damage_2500ms>health.max*0.50
@@ -43,7 +43,7 @@ local ST = {
 	--actions.prot+=/call_action_list,name=prot_aoe,if=spell_targets.neltharions_fury>=2
 	{AoE, 'area(6).enemies>=2'},
 	--actions.prot+=/focused_rage,if=talent.ultimatum.enabled&buff.ultimatum.up&!talent.vengeance.enabled
-	{'Focused Rage', 'talent(3,2)&buff(Ultimatum)&!talent(6,1)'},
+	{'Vengeance: Focused Rage', 'talent(3,2)&buff(Ultimatum)&!talent(6,1)'},
 	--actions.prot+=/battle_cry,if=(talent.vengeance.enabled&talent.ultimatum.enabled&cooldown.shield_slam.remains<=5-gcd.max-0.5)||!talent.vengeance.enabled
 	{'Battle Cry', '!{talent(6,1)&talent(3,2)&spell(Shield Slam).cooldown<=5-gcd-0.5}||!talent(6,1)'},
 	--actions.prot+=/demoralizing_shout,if=talent.booming_voice.enabled&buff.battle_cry.up
