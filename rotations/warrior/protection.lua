@@ -53,7 +53,7 @@ local ST = {
 	--actions.prot+=/neltharions_fury,if=incoming_damage_2500ms>health.max*0.20&!buff.shield_block.up
 	{'Neltharions Fury', 'incdmg(2.5)>health.max*0.20&!buff(Shield Block)'},
 	--actions.prot+=/shield_slam,if=!(cooldown.shield_block.remains<=gcd.max*2&!buff.shield_block.up&talent.heavy_repercussions.enabled)
-	{'Shield Slam', '!{spell(Shield Block).cooldown<=gcd*2!&buff&talent(7,2)}'},
+	{'Shield Slam', '!{spell(Shield Block).cooldown<=gcd*2&!buff&talent(7,2)}'},
 	--actions.prot+=/revenge,if=cooldown.shield_slam.remains<=gcd.max*2
 	{'Revenge', 'spell(Shield Slam).cooldown<=gcd*2'},
 	--actions.prot+=/devastate
