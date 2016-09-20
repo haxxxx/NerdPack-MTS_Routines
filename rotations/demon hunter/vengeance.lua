@@ -1,24 +1,9 @@
-local mKey = 'MTS_DH_veng'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = "Demon Hunter - Vengeance Settings",
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
+local GUI = {
 
-	}
 }
-
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local Keybinds = {
@@ -87,4 +72,4 @@ local outCombat = {
 	--actions.precombat+=/potion,name=unbending_potion
 }
 
-NeP.Engine.registerRotation(581, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demon Hunter - Vengeance', inCombat, outCombat, exeOnLoad)
+NeP.Engine.registerRotation(581, '[|cff'..MTS.Interface.addonColor..'MTS|r] Demon Hunter - Vengeance', inCombat, outCombat, exeOnLoad, GUI)
