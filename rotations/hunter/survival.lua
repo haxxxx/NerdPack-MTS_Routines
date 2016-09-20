@@ -1,24 +1,9 @@
-local mKey = 'MTSHunterSV'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Hunter Survival Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-		
-	}
-}
+local GUI = {
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
+}
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local Survival = {
@@ -58,17 +43,18 @@ local Keybinds = {
 	{'%pause', 'keybind(alt)'},
 }
 
+local inCombat = {
+	{'Mongoose Bite', 'lastcast(Mongoose Bite)'},
+	{Keybinds},
+	{Survival, 'player.health < 100'},
+	{Cooldowns, 'toggle(cooldowns)'},
+	{pet, {'pet.exists', 'pet.alive'}},
+	{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
+	{ST, {'target.range < 8', 'target.infront'}}
+}
+
 local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(255, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunter - Survival', 
-	{-- In-Combat
-		{'Mongoose Bite', 'lastcast(Mongoose Bite)'},
-		{Keybinds},
-		{Survival, 'player.health < 100'},
-		{Cooldowns, 'toggle(cooldowns)'},
-		{pet, {'pet.exists', 'pet.alive'}},
-		{AoE, {'toggle(AoE)', 'player.area(8).enemies >= 3'}},
-		{ST, {'target.range < 8', 'target.infront'}}
-	}, outCombat, exeOnLoad)
+NeP.Engine.registerRotation(255, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunter - Survival', inCombat, outCombat, exeOnLoad, GUI)

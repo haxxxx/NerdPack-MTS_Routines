@@ -1,41 +1,25 @@
-local mKey = 'MTSPalaHoly'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Paladin Holy Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-		{type = 'header', text = 'Keybinds', align = 'center'},
-		{type = 'text', text = 'Alt: PAUSE CR'},
+local GUI = {
+	{type = 'header', text = 'Keybinds', align = 'center'},
+	{type = 'text', text = 'Alt: PAUSE CR'},
 
-		{type = 'ruler'},{type = 'spacer'},
-		{type = 'header', text = 'General', align = 'center'},
-		{type = 'spinner', text = 'PANIC! Lay on Hands (Health %)', key = 'G_LoH', default = 25},
-		{type = 'spinner', text = 'PANIC! Light of the Martyr (Health %)', key = 'G_LotM', default = 30},
+	{type = 'ruler'},{type = 'spacer'},
+	{type = 'header', text = 'General', align = 'center'},
+	{type = 'spinner', text = 'PANIC! Lay on Hands (Health %)', key = 'G_LoH', default = 25},
+	{type = 'spinner', text = 'PANIC! Light of the Martyr (Health %)', key = 'G_LotM', default = 30},
 		
-		{type = 'ruler'},{type = 'spacer'},
-		{type = 'header', text = 'Tank', align = 'center'},
+	{type = 'ruler'},{type = 'spacer'},
+	{type = 'header', text = 'Tank', align = 'center'},
 
-		{type = 'ruler'},{type = 'spacer'},
-		{type = 'header', text = 'Player', align = 'center'},
+	{type = 'ruler'},{type = 'spacer'},
+	{type = 'header', text = 'Player', align = 'center'},
 
-		{type = 'ruler'},{type = 'spacer'},
-		{type = 'header', text = 'Lowest', align = 'center'},
-		{type = 'spinner', text = 'Holy Light (Health %)', key = 'L_HL', default = 100},
-
-	}
+	{type = 'ruler'},{type = 'spacer'},
+	{type = 'header', text = 'Lowest', align = 'center'},
+	{type = 'spinner', text = 'Holy Light (Health %)', key = 'L_HL', default = 100},
 }
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
-
-local lib = function()
+local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 	NeP.Interface.CreateToggle(
   		'dps', 
   		'Interface\\Icons\\Spell_shaman_stormearthfire.png‎', 
@@ -48,7 +32,7 @@ local keybinds = {
 }
 
 local FastHeals = {
-	{'!Lay on Hands', (function() return E('lowest.health < '..F('G_LoH')) end), 'lowest'},
+	{'!Lay on Hands', 'lowest.health < UI(G_LoH)', 'lowest'},
 	-- Automated Dispels
 	{'%dispelall'},
 	{{--Consume Infusion of Light procs using the appropriate heal before your next Holy Shock
@@ -62,7 +46,7 @@ local FastHeals = {
 	--Light of the Martyr a potent emergency heal as long as you heave health to spare.
 	{'!Light of the Martyr', {
 		'player.health > 40',
-		(function() return E('lowest.health < '..F('G_LotM')) end)
+		'lowest.health < UI(G_LotM)'
 	}, 'lowest'},
 }
 
@@ -84,13 +68,24 @@ local Lowest = {
 	--Flash of Light use as an emergency heal to save players facing death.
 	{'Flash of Light', 'lowest.health < 50', 'lowest'},
 	--Holy Light use to heal moderate to high damage.
-	{'Holy Light', (function() return E('lowest.health < '..F('L_HL')) end), 'lowest'}
+	{'Holy Light', 'lowest.health < UI(L_HL)', 'lowest'}
 }
 
 local DPS = {
 	{'Judgment', nil, 'target'},
 	{'Holy Shock', nil, 'target'},
 	{'Crusader Strike', nil, 'target'}
+}
+
+local inCombat = {
+	{Keybinds},
+	{DPS, {'toggle(dps)', '!lowest.health < 70', 'target.enemy'}},
+	{Moving, 'player.moving'},
+	{{ -- Not moving
+		{FastHeals},
+		{Tank},
+		{Lowest, 'lowest.health < 100'}
+	}, '!player.moving' }
 }
 
 local outCombat = {
@@ -101,14 +96,4 @@ local outCombat = {
 	}, '!player.moving' },
 }
 
-NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', 
-	{-- In-Combat
-		{Keybinds},
-		{DPS, {'toggle(dps)', '!lowest.health < 70', 'target.enemy'}},
-		{Moving, 'player.moving'},
-		{{ -- Not moving
-			{FastHeals},
-			{Tank},
-			{Lowest, 'lowest.health < 100'}
-		}, '!player.moving' }
-	}, outCombat, lib)
+NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', inCombat, outCombat, exeOnLoad, GUI)
