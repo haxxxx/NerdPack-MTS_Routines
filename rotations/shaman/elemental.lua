@@ -1,24 +1,9 @@
-local mKey = 'MTS_ShamanEle'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Shaman - Elemental Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-		
-	}
-}
+local GUI = {
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
+}
 
 local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local Survival = {
@@ -57,15 +42,16 @@ local Keybinds = {
 	{'%pause', 'keybind(alt)'},
 }
 
+local inCombat = {
+	{Keybinds},
+	{Survival, 'player.health < 100'},
+	{Cooldowns, 'toggle(cooldowns)'},
+	{AoE, {'toggle(AoE)', 'player.area(40).enemies >= 3'}},
+	{ST, {'target.range < 40', 'target.infront'}}
+}
+
 local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(262, '[|cff'..MTS.Interface.addonColor..'MTS|r] Shaman - Elemental', 
-	{-- In-Combat
-		{Keybinds},
-		{Survival, 'player.health < 100'},
-		{Cooldowns, 'toggle(cooldowns)'},
-		{AoE, {'toggle(AoE)', 'player.area(40).enemies >= 3'}},
-		{ST, {'target.range < 40', 'target.infront'}}
-	}, outCombat, exeOnLoad)
+NeP.Engine.registerRotation(262, '[|cff'..MTS.Interface.addonColor..'MTS|r] Shaman - Elemental', inCombat, outCombat, exeOnLoad, GUI)

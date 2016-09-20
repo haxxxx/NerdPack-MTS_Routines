@@ -1,24 +1,9 @@
-local mKey = 'MTS_PriestShadow'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Priest - Shadow Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-   
-	}
+local GUI = {
+
 }
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
-
-local lib = function()
+local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local Voidform = {
@@ -47,12 +32,13 @@ local ST = {
 	{'Mind Flay'}
 }
 
+local inCombat = {
+	{Voidform, 'player.buff(Voidform)'},
+	{ST, '!player.buff(Voidform)'}
+}
+
 local outCombat = {
 
 }
 
-NeP.Engine.registerRotation(258, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Shadow', 
-	{-- In-Combat
-		{Voidform, 'player.buff(Voidform)'},
-		{ST, '!player.buff(Voidform)'}
-	},outCombat, lib)
+NeP.Engine.registerRotation(258, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Shadow', inCombat, outCombat, exeOnLoad, GUI)

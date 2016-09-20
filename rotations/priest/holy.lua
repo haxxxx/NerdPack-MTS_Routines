@@ -1,24 +1,9 @@
-local mKey = 'MTS_PriestHoly'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Priest - Holy Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-   
-	}
+local GUI = {
+
 }
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
-
-local lib = function()
+local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local keybinds = {
@@ -60,6 +45,19 @@ local Lowest = {
 	{'Heal', nil, 'lowest'}
 }
 
+local inCombat = {
+	{keybinds},
+	{SpiritOfRedemption, 'player.buff(Spirit of Redemption)'},
+	{'%dispelAll'},
+	{{ -- Not moving
+		{FastHeals, 'lowest.health < 30'},
+		{Tank, 'tank.health < 100'},
+		{Player, 'player.health < 100'},
+		{Lowest, 'lowest.health < 100'}
+	}, '!player.moving' },
+	{moving, 'player.moving' }
+}
+
 local outCombat = {
 	{keybinds},
 	{'Renew', {'!lowest.buff(Renew)', 'lowest.health < 100'}, 'lowest'},
@@ -70,16 +68,4 @@ local moving = {
 	{'Renew', {'!lowest.buff(Renew)', 'lowest.health < 100'}, 'lowest'}
 }
 
-NeP.Engine.registerRotation(257, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Holy', 
-	{-- In-Combat
-		{keybinds},
-		{SpiritOfRedemption, 'player.buff(Spirit of Redemption)'},
-		{'%dispelAll'},
-		{{ -- Not moving
-			{FastHeals, 'lowest.health < 30'},
-			{Tank, 'tank.health < 100'},
-			{Player, 'player.health < 100'},
-			{Lowest, 'lowest.health < 100'}
-		}, '!player.moving' },
-		{moving, 'player.moving' }
-	},outCombat, lib)
+NeP.Engine.registerRotation(257, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Holy', inCombat, outCombat, exeOnLoad, GUI)

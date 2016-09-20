@@ -1,24 +1,9 @@
-local mKey = 'MTS_PriestDisc'
-local config = {
-	key = mKey,
-	profiles = true,
-	title = '|T'..MTS.Interface.Logo..':10:10|t MTS Config',
-	subtitle = 'Priest - Discipline Settings',
-	color = (function() return NeP.Core.classColor('player') end),
-	width = 250,
-	height = 500,
-	config = {
-   
-	}
+local GUI = {
+
 }
 
-local E = MTS.dynEval
-local F = function(key) return NeP.Interface.fetchKey(mKey, key, 100) end
-
-local lib = function()
+local exeOnLoad = function()
 	MTS.Splash()
-	NeP.Interface.buildGUI(config)
-	MTS.ClassSetting(mKey)
 end
 
 local Atonement = {
@@ -39,12 +24,13 @@ local Lowest = {
 	{'Plea', 'lowest.health < 30'}
 }
 
+local inCombat = {
+	{Lowest, 'lowest.health < 100'},
+	{Atonement}
+}
+
 local outCombat = {
 
 }
 
-NeP.Engine.registerRotation(256, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Discipline', 
-	{-- In-Combat
-		{Lowest, 'lowest.health < 100'},
-		{Atonement}
-	},outCombat, lib)
+NeP.Engine.registerRotation(256, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Discipline', inCombat, outCombat, exeOnLoad, GUI)
