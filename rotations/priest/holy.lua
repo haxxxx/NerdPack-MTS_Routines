@@ -23,7 +23,7 @@ end
 
 local keybinds = {
 	{'%pause', 'keybind(shift)'},
-	{'Angelic Fearther', 'keybind(control)'}
+	{'Angelic Feather', 'keybind(control)'}
 }
 
 local SpiritOfRedemption = {
@@ -74,7 +74,7 @@ NeP.Engine.registerRotation(257, '[|cff'..MTS.Interface.addonColor..'MTS|r] Prie
 	{-- In-Combat
 		{keybinds},
 		{SpiritOfRedemption, 'player.buff(Spirit of Redemption)'},
-		{'Purify', 'dispellAll(Purity)'},
+		{'%dispelAll'},
 		{{ -- Not moving
 			{FastHeals, 'lowest.health < 30'},
 			{Tank, 'tank.health < 100'},

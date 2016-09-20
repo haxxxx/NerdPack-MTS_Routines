@@ -57,7 +57,7 @@ local DPS = {
 
 local Fast = {
 	{'!Healing Surge', (function() return E('lowest.health < '..F('G_HS')) end), 'lowest'},
-	{'Purify Spirit', {(function() return F('G_DSE') end), 'dispellAll(Purify Spirit)'}},
+	{'%dispelall', (function() return F('G_DSE') end)},
 }
 
 local Totems = {

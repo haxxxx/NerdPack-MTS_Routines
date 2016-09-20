@@ -39,7 +39,7 @@ local Lowest = {
 	{'Plea', 'lowest.health < 30'}
 }
 
-local ouCombat = {
+local outCombat = {
 
 }
 
@@ -47,4 +47,4 @@ NeP.Engine.registerRotation(256, '[|cff'..MTS.Interface.addonColor..'MTS|r] Prie
 	{-- In-Combat
 		{Lowest, 'lowest.health < 100'},
 		{Atonement}
-	},ouCombat, lib)
+	},outCombat, lib)
