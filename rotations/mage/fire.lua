@@ -23,9 +23,12 @@ local Talents = {
 	--actions.active_talents=flame_on,if=action.fire_blast.charges=0&(cooldown.combustion.remains>40+(talent.kindling.enabled*25)|target.time_to_die.remains<cooldown.combustion.remains)
 	--actions.active_talents+=/blast_wave,if=(buff.combustion.down)|(buff.combustion.up&action.fire_blast.charges<1&action.phoenixs_flames.charges<1)
 	--actions.active_talents+=/meteor,if=cooldown.combustion.remains>30|(cooldown.combustion.remains>target.time_to_die)|buff.rune_of_power.up
+	{'Meteor', 'spell(Combustion).cooldown>30||{spell(Combustion).cooldown>target.ttd}||buff(Rune of Power)'},
 	--actions.active_talents+=/cinderstorm,if=cooldown.combustion.remains<cast_time&(buff.rune_of_power.up|!talent.rune_on_power.enabled)|cooldown.combustion.remains>10*spell_haste&!buff.combustion.up
 	--actions.active_talents+=/dragons_breath,if=equipped.132863
+	{'Dragons Breath', 'equipped(132863)'},
 	--actions.active_talents+=/living_bomb,if=active_enemies>3&buff.combustion.down
+	{'Living Bomb', 'area.enemies>3&!buff(Combustion)'}
 }
 
 local Combustion = {
@@ -109,6 +112,7 @@ local inCombat = {
 	--actions+=/mirror_image,if=buff.combustion.down
 	{'Mirror Image', 'buff(Combustion)'},
 	--actions+=/rune_of_power,if=cooldown.combustion.remains>40&buff.combustion.down&(cooldown.flame_on.remains<5|cooldown.flame_on.remains>30)&!talent.kindling.enabled|target.time_to_die.remains<11|talent.kindling.enabled&(charges_fractional>1.8|time<40)&cooldown.combustion.remains>40
+	{'Rune of Power', 'spell(Combustion).cooldown>40&!buff(Combustion)&{spell(Flame On).cooldown<5||spell(Flame On).cooldown>30}&!talent(7,1)||target.ttd<11||talent(7,1)&{spell.charges>1.8||combat.time<40}&spell(Combustion).cooldown>40'},
 	--actions+=/call_action_list,name=combustion_phase,if=cooldown.combustion.remains<=action.rune_of_power.cast_time+(!talent.kindling.enabled*gcd)|buff.combustion.up
 	{Combustion, 'buff(Combustion)'},
 	--actions+=/call_action_list,name=rop_phase,if=buff.rune_of_power.up&buff.combustion.down
