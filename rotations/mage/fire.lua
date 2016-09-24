@@ -25,6 +25,7 @@ local Talents = {
 	--actions.active_talents+=/meteor,if=cooldown.combustion.remains>30|(cooldown.combustion.remains>target.time_to_die)|buff.rune_of_power.up
 	{'Meteor', 'spell(Combustion).cooldown>30||{spell(Combustion).cooldown>target.ttd}||buff(Rune of Power)'},
 	--actions.active_talents+=/cinderstorm,if=cooldown.combustion.remains<cast_time&(buff.rune_of_power.up|!talent.rune_on_power.enabled)|cooldown.combustion.remains>10*spell_haste&!buff.combustion.up
+	{'Cinderstorm', 'spell(Combustion).cooldown<spell.casttime&{buff(Rune of Power)||!talent(3,2)}||spell(Combustion)>10*haste&!buff(Combustion)'},
 	--actions.active_talents+=/dragons_breath,if=equipped.132863
 	{'Dragons Breath', 'equipped(132863)'},
 	--actions.active_talents+=/living_bomb,if=active_enemies>3&buff.combustion.down
@@ -32,6 +33,10 @@ local Talents = {
 }
 
 local Combustion = {
+	{'Fire Blast', (function( ... )
+		print('hit')
+		return false
+	end)},
 	--actions.combustion_phase=rune_of_power,if=buff.combustion.down
 	{'Rune of Power', '!buff(Combustion)'},
 	--actions.combustion_phase+=/call_action_list,name=active_talents
@@ -73,7 +78,7 @@ local ROP = {
 	--actions.rop_phase+=/scorch,if=target.health.pct<=25&equipped.132454
 	{'Scorch', 'target.health<=25&equipped(132454)'},
 	--actions.rop_phase+=/fireball
-	{'Fireball'}
+	{'Fireball'},
 }
 
 local ST = {
@@ -116,11 +121,11 @@ local inCombat = {
 	--actions+=/time_warp,if=target.health.pct<25|time=0
 	--actions+=/shard_of_the_exodar_warp,if=buff.bloodlust.down
 	--actions+=/mirror_image,if=buff.combustion.down
-	{'Mirror Image', 'buff(Combustion)'},
+	{'Mirror Image', '!buff(Combustion)'},
 	--actions+=/rune_of_power,if=cooldown.combustion.remains>40&buff.combustion.down&(cooldown.flame_on.remains<5|cooldown.flame_on.remains>30)&!talent.kindling.enabled|target.time_to_die.remains<11|talent.kindling.enabled&(charges_fractional>1.8|time<40)&cooldown.combustion.remains>40
 	{'Rune of Power', 'spell(Combustion).cooldown>40&!buff(Combustion)&{spell(Flame On).cooldown<5||spell(Flame On).cooldown>30}&!talent(7,1)||target.ttd<11||talent(7,1)&{spell.charges>1.8||combat.time<40}&spell(Combustion).cooldown>40'},
 	--actions+=/call_action_list,name=combustion_phase,if=cooldown.combustion.remains<=action.rune_of_power.cast_time+(!talent.kindling.enabled*gcd)|buff.combustion.up
-	{Combustion, 'buff(Combustion)'},
+	{Combustion, 'spell(Combustion).cooldown<=spell(Rune of Power).casttime+gcd||buff(Combustion)'},
 	--actions+=/call_action_list,name=rop_phase,if=buff.rune_of_power.up&buff.combustion.down
 	{ROP, 'buff(Rune of Power)&!buff(Combustion)'},
 	--actions+=/call_action_list,name=single_target
