@@ -21,7 +21,7 @@ local Keybinds = {
 
 local Talents = {
 	--actions.active_talents=flame_on,if=action.fire_blast.charges=0&(cooldown.combustion.remains>40+(talent.kindling.enabled*25)|target.time_to_die.remains<cooldown.combustion.remains)
-	--actions.active_talents+=/blast_wave,if=(buff.combustion.down)|(buff.combustion.up&action.fire_blast.charges<1&action.phoenixs_flames.charges<1)
+	--actions.active_talents+=/blast_wave,if=(buff.combustion.down)|(buff.combustion.up&action.fire_blast.charges<1&action.Phoenix\'s_flames.charges<1)
 	--actions.active_talents+=/meteor,if=cooldown.combustion.remains>30|(cooldown.combustion.remains>target.time_to_die)|buff.rune_of_power.up
 	{'Meteor', 'spell(Combustion).cooldown>30||{spell(Combustion).cooldown>target.ttd}||buff(Rune of Power)'},
 	--actions.active_talents+=/cinderstorm,if=cooldown.combustion.remains<cast_time&(buff.rune_of_power.up|!talent.rune_on_power.enabled)|cooldown.combustion.remains>10*spell_haste&!buff.combustion.up
@@ -46,12 +46,13 @@ local Combustion = {
 	--actions.combustion_phase+=/arcane_torrent
 	{'Arcane Torrent'},
 	--actions.combustion_phase+=/pyroblast,if=buff.hot_streak.up
-	{'Pyroblast', 'buff(Hot Streak\!)'},
+	{'Pyroblast', 'buff(Hot Streak!)'},
 	--actions.combustion_phase+=/fire_blast,if=buff.heating_up.up
 	{'Fire Blast', 'buff(Heating Up)'},
-	--actions.combustion_phase+=/phoenixs_flames
-	{'Phoenixs Flames'},
+	--actions.combustion_phase+=/Phoenix\'s_flames
+	{'Phoenix\'s Flames'},
 	--actions.combustion_phase+=/scorch,if=buff.combustion.remains>cast_time
+	{'Scorch', 'buff(Combustion).duration>spell.casttime'},
 	--actions.combustion_phase+=/scorch,if=target.health.pct<=25&equipped.132454
 	{'Scorch', 'target.health<=25&equipped(132454)'},
 }
@@ -60,13 +61,15 @@ local ROP = {
 	--actions.rop_phase=rune_of_power
 	{'Rune of Power'},
 	--actions.rop_phase+=/pyroblast,if=buff.hot_streak.up
-	{'Pyroblast', 'buff(Hot Streak\!)'},
+	{'Pyroblast', 'buff(Hot Streak!)'},
 	--actions.rop_phase+=/call_action_list,name=active_talents
 	{Talents},
 	--actions.rop_phase+=/pyroblast,if=buff.kaelthas_ultimate_ability.react
 	{'Pyroblast', 'buff(Kael\'thas\'s Ultimate Ability)'},
 	--actions.rop_phase+=/fire_blast,if=!prev_off_gcd.fire_blast
-	--actions.rop_phase+=/phoenixs_flames,if=!prev_gcd.phoenixs_flames
+	{'Fire Blast', '!lastcast'},
+	--actions.rop_phase+=/Phoenix\'s_flames,if=!prev_gcd.Phoenix\'s_flames
+	{'Phoenix\'s Flames', '!lastcast'},
 	--actions.rop_phase+=/scorch,if=target.health.pct<=25&equipped.132454
 	{'Scorch', 'target.health<=25&equipped(132454)'},
 	--actions.rop_phase+=/fireball
@@ -75,24 +78,27 @@ local ROP = {
 
 local ST = {
 	--actions.single_target=pyroblast,if=buff.hot_streak.up&buff.hot_streak.remains<action.fireball.execute_time
-	--actions.single_target+=/phoenixs_flames,if=charges_fractional>2.7&active_enemies>2
-	{'Phoenixs flames', 'spell.charges>2.7&area(40).enemies>2'},
+	{'Pyroblast', 'buff(Hot Streak)&buff(Hot Streak!).duration<spell(Fireball).casttime'},
+	--actions.single_target+=/Phoenix\'s_flames,if=charges_fractional>2.7&active_enemies>2
+	{'Phoenix\'s flames', 'spell.charges>2.7&area(40).enemies>2'},
 	--actions.single_target+=/flamestrike,if=talent.flame_patch.enabled&active_enemies>2&buff.hot_streak.react
-	{'Flamestrike', 'talent(6,3)&area(40).enemies>2&buff(Hot Streak\!)'},
+	{'Flamestrike', 'talent(6,3)&area(40).enemies>2&buff(Hot Streak!)'},
 	--actions.single_target+=/pyroblast,if=buff.hot_streak.up&!prev_gcd.pyroblast
-	{'Pyroblast', 'buff(Hot Streak\!)'},
+	{'Pyroblast', 'buff(Hot Streak!)&!lastcast'},
 	--actions.single_target+=/pyroblast,if=buff.hot_streak.react&target.health.pct<=25&equipped.132454
-	{'Pyroblast', 'buff(Hot Streak\!)&target.health<=25&equipped(132454)'},
+	{'Pyroblast', 'buff(Hot Streak!)&target.health<=25&equipped(132454)'},
 	--actions.single_target+=/pyroblast,if=buff.kaelthas_ultimate_ability.react
 	{'Pyroblast', 'buff(Kael\'thas\'s Ultimate Ability)'},
 	--actions.single_target+=/call_action_list,name=active_talents
 	{Talents},
 	--actions.single_target+=/fire_blast,if=!talent.kindling.enabled&buff.heating_up.up&(!talent.rune_of_power.enabled|charges_fractional>1.4|cooldown.combustion.remains<40)&(3-charges_fractional)*(12*spell_haste)<cooldown.combustion.remains+3|target.time_to_die.remains<4
+	{'Fire Blast', 'talent(7,1)&buff(Heating Up)&{!talent(3,2)||spell.charges>1.4||spell(Combustion.cooldown<40)}&{3-spell.charges}*{12*haste}<spell(Combustion).cooldown+3||target.ttd<4'},
 	--actions.single_target+=/fire_blast,if=talent.kindling.enabled&buff.heating_up.up&(!talent.rune_of_power.enabled|charges_fractional>1.5|cooldown.combustion.remains<40)&(3-charges_fractional)*(18*spell_haste)<cooldown.combustion.remains+3|target.time_to_die.remains<4
-	--actions.single_target+=/phoenixs_flames,if=(buff.combustion.up|buff.rune_of_power.up|buff.incanters_flow.stack>3|talent.mirror_image.enabled)&artifact.phoenix_reborn.enabled&(4-charges_fractional)*13<cooldown.combustion.remains+5|target.time_to_die.remains<10
-	{'Phoenixs Flames', '{buff(combustion)|buff(Rune of Power)|buff(Incanters Flow).count>3|talent(3,1)}&spell(Phoenix Reborn).exists&{4-spell.charges}*30<spell(Combustion).cooldown+5||target.tdd<10'},
-	--actions.single_target+=/phoenixs_flames,if=(buff.combustion.up|buff.rune_of_power.up)&(4-charges_fractional)*30<cooldown.combustion.remains+5
-	{'Phoenixs Flames', '{buff(combustion)|buff(Rune of Power)}&{4-spell.charges}*30<spell(Combustion).cooldown+5'},
+	{'Fire Blast', 'talent(7,1)&buff(Heating Up)&{!talent(3,2)||spell.charges>1.5||spell(Combustion.cooldown<40)}&{3-spell.charges}*{18*haste}<spell(Combustion).cooldown+3||target.ttd<4'},
+	--actions.single_target+=/Phoenix\'s_flames,if=(buff.combustion.up|buff.rune_of_power.up|buff.incanters_flow.stack>3|talent.mirror_image.enabled)&artifact.phoenix_reborn.enabled&(4-charges_fractional)*13<cooldown.combustion.remains+5|target.time_to_die.remains<10
+	{'Phoenix\'s Flames', '{buff(combustion)|buff(Rune of Power)|buff(Incanters Flow).count>3|talent(3,1)}&spell(Phoenix Reborn).exists&{4-spell.charges}*30<spell(Combustion).cooldown+5||target.tdd<10'},
+	--actions.single_target+=/Phoenix\'s_flames,if=(buff.combustion.up|buff.rune_of_power.up)&(4-charges_fractional)*30<cooldown.combustion.remains+5
+	{'Phoenix\'s Flames', '{buff(combustion)|buff(Rune of Power)}&{4-spell.charges}*30<spell(Combustion).cooldown+5'},
 	--actions.single_target+=/scorch,if=target.health.pct<=25&equipped.132454
 	{'Scorch', 'target.health<=25&equipped(132454)'},
 	--actions.single_target+=/fireball
