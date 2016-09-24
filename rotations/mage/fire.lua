@@ -33,12 +33,8 @@ local Talents = {
 }
 
 local Combustion = {
-	{'Fire Blast', (function( ... )
-		print('hit')
-		return false
-	end)},
 	--actions.combustion_phase=rune_of_power,if=buff.combustion.down
-	{'Rune of Power', '!buff(Combustion)'},
+	{ROP, '!buff(Combustion)'},
 	--actions.combustion_phase+=/call_action_list,name=active_talents
 	{Talents},
 	--actions.combustion_phase+=/combustion
@@ -62,9 +58,8 @@ local Combustion = {
 	{'Scorch', 'target.health<=25&equipped(132454)'},
 }
 
+--actions.rop_phase=rune_of_power
 local ROP = {
-	--actions.rop_phase=rune_of_power
-	{'Rune of Power'},
 	--actions.rop_phase+=/pyroblast,if=buff.hot_streak.up
 	{'Pyroblast', 'buff(Hot Streak!)'},
 	--actions.rop_phase+=/call_action_list,name=active_talents
