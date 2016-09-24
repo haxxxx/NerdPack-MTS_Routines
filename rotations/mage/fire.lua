@@ -21,6 +21,7 @@ local Keybinds = {
 
 local Talents = {
 	--actions.active_talents=flame_on,if=action.fire_blast.charges=0&(cooldown.combustion.remains>40+(talent.kindling.enabled*25)|target.time_to_die.remains<cooldown.combustion.remains)
+	{'Flame On', 'spell(Fire Blast).charges=0&{spell(Combustion).cooldown>40||target.tdd<spell(Combustion).cooldown'},
 	--actions.active_talents+=/blast_wave,if=(buff.combustion.down)|(buff.combustion.up&action.fire_blast.charges<1&action.Phoenix\'s_flames.charges<1)
 	--actions.active_talents+=/meteor,if=cooldown.combustion.remains>30|(cooldown.combustion.remains>target.time_to_die)|buff.rune_of_power.up
 	{'Meteor', 'spell(Combustion).cooldown>30||{spell(Combustion).cooldown>target.ttd}||buff(Rune of Power)'},
