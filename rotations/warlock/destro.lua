@@ -24,7 +24,7 @@ local ST = {
 }
 
 local Keybinds = {
-	-- Pause
+	{'Cataclysm', 'keybind(shift)', 'mouseover.ground'},
 	{'%pause', 'keybind(alt)'},
 }
 

@@ -17,6 +17,7 @@ local Moving = {
 local Keybinds = {
 	-- Pause
 	{'%pause', 'keybind(alt)'},
+	{'Flamestrike', 'keybind(shift)', 'mouseover.ground'}
 }
 
 local Talents = {
