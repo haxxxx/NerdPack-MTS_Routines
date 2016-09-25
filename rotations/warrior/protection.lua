@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTSCR.Splash()
+	MTSCR.ExeOnLoad()
 end
 
 local Keybinds = {

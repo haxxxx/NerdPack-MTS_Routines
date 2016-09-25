@@ -25,7 +25,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTSCR.Splash()
+	MTSCR.ExeOnLoad()
 	NeP.Interface.CreateToggle(
   		'dps', 
   		'Interface\\Icons\\Spell_shaman_stormearthfire.png‎', 
