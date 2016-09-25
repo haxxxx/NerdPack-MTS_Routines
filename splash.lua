@@ -1,13 +1,19 @@
 -- Splash stuff
 local Splash_Frame = CreateFrame("Frame", "MTS_SPLASH", UIParent)
+Splash_Frame:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
+	edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
+	tile = true, tileSize = 16, edgeSize = 16, 
+	insets = { left = 4, right = 4, top = 4, bottom = 4 }
+});
+Splash_Frame:SetBackdropColor(0,0,0,1);
 Splash_Frame:Hide()
 
 local texture = Splash_Frame:CreateTexture()
-texture:SetPoint("LEFT",0,0)
+texture:SetPoint("LEFT",-4,0)
 texture:SetSize(100,100)
 
 local text = Splash_Frame:CreateFontString(nil, "BACKGROUND", "PVPInfoTextFont");
-text:SetPoint("RIGHT",0,0)
+text:SetPoint("RIGHT",-4,0)
 
 local callTime = 0
 
@@ -37,7 +43,7 @@ function MTSCR.Splash()
 	texture:SetTexture(icon)
 	text:SetText(AddonInfo..'\n|cff'..color..class..' - '..SpecName..' \n|rBy: '..MTSCR.Author)
 	callTime = GetTime()
-	local Width = text:GetStringWidth()+texture:GetWidth()
-	Splash_Frame:SetSize(Width,300)
+	local Width = text:GetStringWidth()+texture:GetWidth()+8
+	Splash_Frame:SetSize(Width,100)
 	Splash_Frame:SetPoint("CENTER",0,0)
 end
