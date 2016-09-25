@@ -1,15 +1,13 @@
 -- Splash stuff
 local Splash_Frame = CreateFrame("Frame", "MTS_SPLASH", UIParent)
-Splash_Frame:SetPoint("CENTER",0,0)
-Splash_Frame:SetSize(100,170)
 Splash_Frame:Hide()
 
 local texture = Splash_Frame:CreateTexture()
-texture:SetPoint("TOP",0,0)
+texture:SetPoint("LEFT",0,0)
 texture:SetSize(100,100)
 
 local text = Splash_Frame:CreateFontString(nil, "BACKGROUND", "PVPInfoTextFont");
-text:SetPoint("BOTTOM",0,0)
+text:SetPoint("RIGHT",0,0)
 
 local callTime = 0
 
@@ -31,7 +29,7 @@ local AddonInfo = '|cff'..MTSCR.Interface.addonColor..MTSCR.Name..' V:'..MTSCR.V
 function MTSCR.Splash()
 	Splash_Frame:SetAlpha(1)
 	Splash_Frame:Show()
-	PlaySound('LEVELUP', 'SFX')
+	--PlaySound('LEVELUP', 'SFX')
 	local color = NeP.Core.classColor('player', _type, alpha)
 	local currentSpec = GetSpecialization()
 	local _, SpecName, _, icon, background = GetSpecializationInfo(currentSpec)
@@ -39,4 +37,7 @@ function MTSCR.Splash()
 	texture:SetTexture(icon)
 	text:SetText(AddonInfo..'\n|cff'..color..class..' - '..SpecName..' \n|rBy: '..MTSCR.Author)
 	callTime = GetTime()
+	local Width = text:GetStringWidth()+texture:GetWidth()
+	Splash_Frame:SetSize(Width,300)
+	Splash_Frame:SetPoint("CENTER",0,0)
 end
