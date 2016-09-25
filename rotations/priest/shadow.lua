@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Voidform = {
@@ -41,4 +41,4 @@ local outCombat = {
 
 }
 
-NeP.Engine.registerRotation(258, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Shadow', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(258, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Priest - Shadow', inCombat, outCombat, exeOnLoad, GUI)

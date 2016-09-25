@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Survival = {
@@ -50,4 +50,4 @@ local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(250, '[|cff'..MTS.Interface.addonColor..'MTS|r] Death Knight - Beast Blood', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(250, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Death Knight - Beast Blood', inCombat, outCombat, exeOnLoad, GUI)

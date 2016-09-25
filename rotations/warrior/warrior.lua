@@ -17,4 +17,4 @@ local OutCombat = {
 	{Keybinds}
 }
 
-NeP.Engine.registerRotation(1, '[|cff'..MTS.Interface.addonColor..'MTS|r] Warrior - Basic', InCombat, OutCombat, exeOnLoad)
+NeP.Engine.registerRotation(1, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Warrior - Basic', InCombat, OutCombat, exeOnLoad)

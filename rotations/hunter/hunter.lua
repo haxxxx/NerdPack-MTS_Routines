@@ -8,4 +8,4 @@ local outCombat = {
 	
 }
 
-NeP.Engine.registerRotation(3, '[|cff'..MTS.Interface.addonColor..'MTS|r] Hunter - Basic', inCombat, outCombat)
+NeP.Engine.registerRotation(3, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Hunter - Basic', inCombat, outCombat)

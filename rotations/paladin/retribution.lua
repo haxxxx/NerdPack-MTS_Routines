@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Survival = {
@@ -221,4 +221,4 @@ local inCombat = {
 	
 }
 
-NeP.Engine.registerRotation(70, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Retribution', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(70, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Paladin - Retribution', inCombat, outCombat, exeOnLoad, GUI)

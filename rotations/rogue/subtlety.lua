@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Survival = {
@@ -46,4 +46,4 @@ local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(261, '[|cff'..MTS.Interface.addonColor..'MTS|r] Rogue - Subtlely', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(261, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Rogue - Subtlely', inCombat, outCombat, exeOnLoad, GUI)

@@ -2,7 +2,7 @@ local GUI = {
 
 }
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Survival = {
@@ -141,4 +141,4 @@ local outCombat = {
 	--actions.precombat+=/pyroblast
 }
 
-NeP.Engine.registerRotation(63, '[|cff'..MTS.Interface.addonColor..'MTS|r] Mage - Fire', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(63, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Mage - Fire', inCombat, outCombat, exeOnLoad, GUI)

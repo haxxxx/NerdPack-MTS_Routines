@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Keybinds = {
@@ -90,4 +90,4 @@ local outCombat = {
 	--actions.precombat+=/potion,name=unbending_potion
 }
 
-NeP.Engine.registerRotation(73, '[|cff'..MTS.Interface.addonColor..'MTS|r] Warrior - Protection', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(73, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Warrior - Protection', inCombat, outCombat, exeOnLoad, GUI)

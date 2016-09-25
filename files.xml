@@ -3,6 +3,7 @@
 
   <!-- Core Files -->
   <Script file="core.lua" />
+  <Script file="lib.lua" />
 
   <!-- Basic Rotations -->
   <Script file="rotations\warrior\warrior.lua" />

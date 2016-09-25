@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local keybinds = {
@@ -68,4 +68,4 @@ local moving = {
 	{'Renew', {'!lowest.buff(Renew)', 'lowest.health < 100'}, 'lowest'}
 }
 
-NeP.Engine.registerRotation(257, '[|cff'..MTS.Interface.addonColor..'MTS|r] Priest - Holy', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(257, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Priest - Holy', inCombat, outCombat, exeOnLoad, GUI)

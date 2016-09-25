@@ -19,7 +19,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 	NeP.Interface.CreateToggle(
   		'dps', 
   		'Interface\\Icons\\Spell_shaman_stormearthfire.png‎', 
@@ -96,4 +96,4 @@ local outCombat = {
 	}, '!player.moving' },
 }
 
-NeP.Engine.registerRotation(65, '[|cff'..MTS.Interface.addonColor..'MTS|r] Paladin - Holy', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(65, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Paladin - Holy', inCombat, outCombat, exeOnLoad, GUI)

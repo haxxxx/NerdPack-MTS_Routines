@@ -3,7 +3,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 end
 
 local Keybinds = {
@@ -19,4 +19,4 @@ local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(105, '[|cff'..MTS.Interface.addonColor..'MTS|r] Druid - Restoration', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(105, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Druid - Restoration', inCombat, outCombat, exeOnLoad, GUI)

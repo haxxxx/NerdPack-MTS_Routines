@@ -25,7 +25,7 @@ local GUI = {
 }
 
 local exeOnLoad = function()
-	MTS.Splash()
+	MTSCR.Splash()
 	NeP.Interface.CreateToggle(
   		'dps', 
   		'Interface\\Icons\\Spell_shaman_stormearthfire.png‎', 
@@ -113,4 +113,4 @@ local outCombat = {
 	{Keybinds},
 }
 
-NeP.Engine.registerRotation(264, '[|cff'..MTS.Interface.addonColor..'MTS|r] Shaman - Restoration', inCombat, outCombat, exeOnLoad, GUI)
+NeP.Engine.registerRotation(264, '[|cff'..MTSCR.Interface.addonColor..'MTS|r] Shaman - Restoration', inCombat, outCombat, exeOnLoad, GUI)
