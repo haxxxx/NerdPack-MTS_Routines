@@ -1,6 +1,8 @@
 MTSCR = {
 	Version = 0.2,
 	Branch = 'BETA',
+	Name = 'NerdPack-MTS_Routines',
+	Author = 'MrTheSoulz',
 	Interface = {
 		addonColor = 'A330C9',
 		Logo = 'Interface\\AddOns\\NerdPack-MTS_Routines\\media\\logo.blp',
