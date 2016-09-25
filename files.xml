@@ -4,6 +4,7 @@
   <!-- Core Files -->
   <Script file="core.lua" />
   <Script file="lib.lua" />
+  <Script file="splash.lua" />
 
   <!-- Basic Rotations -->
   <Script file="rotations\warrior\warrior.lua" />
