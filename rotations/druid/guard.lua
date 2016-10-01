@@ -27,16 +27,16 @@ local ST = {
 	--actions+=/bristling_fur,if=buff.ironfur.remains<2&rage<40
 	{'Bristling Fur', 'buff(Ironfur).duration<2&rage<40'},
 	--actions+=/ironfur,if=buff.ironfur.down|rage.deficit<25
-	{'Ironfur', '!buff'}
+	{'Ironfur', '!buff'},
 	--actions+=/frenzied_regeneration,if=!ticking&incoming_damage_6s%health.max>0.25+(2-charges_fractional)*0.15
 	--actions+=/pulverize,cycle_targets=1,if=buff.pulverize.down
 	--actions+=/mangle
-	{'Mangle'}
+	{'Mangle'},
 	--actions+=/pulverize,cycle_targets=1,if=buff.pulverize.remains<gcd
 	--actions+=/lunar_beam
-	{'Lunar Beam'}
+	{'Lunar Beam'},
 	--actions+=/incarnation
-	{'Incarnation'}
+	{'Incarnation'},
 	--actions+=/thrash_bear,if=active_enemies>=2
 	{'Trash', 'area(6).enemies>=2'},
 	--actions+=/pulverize,cycle_targets=1,if=buff.pulverize.remains<3.6
